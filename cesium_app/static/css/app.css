@@ -1,0 +1,194 @@
+.centered {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+.progress-bar-component{
+    text-align: center;
+    padding: 15px;
+    color: white;
+    /*z-index: -2;*/
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+.progress-bar-component.active{
+    background-color: #008cba;
+}
+.progress-bar-component.light-gray{
+    background-color: #cec8c8;
+}
+.progress-bar-component.dark-gray{
+    background-color: #b7aaaa;
+}
+
+.arrow-right {
+	width: 0;
+	height: 0;
+	border-top: 27px solid transparent;
+	border-bottom: 27px solid transparent;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+}
+.arrow-right.blue{
+    border-left: 27px solid #008cba;
+}
+.arrow-right.light-gray{
+    border-left: 27px solid #cec8c8;
+}
+.arrow-right.dark-gray{
+    border-left: 27px solid #b7aaaa;
+}
+.tri-down {
+
+    /* Styling block element, not required */
+    position: relative;
+    margin-bottom: 2em;
+    padding: 1em;
+    border-bottom: 1px solid #999;
+    background: #f3f3f3;
+}
+
+/* Required for Down Triangle */
+.tri-down:before, .tri-down:after {
+content: "";
+position: absolute;
+width: 0;
+height: 0;
+border-style: solid;
+border-color: transparent;
+border-right: 0;
+}
+
+/* Stroke */
+.tri-down:before {
+bottom: -16px;
+left: 21px;
+
+/* If 1px darken stroke slightly */
+border-left-color: #777;
+border-width: 16px;
+}
+
+/* Fill */
+.tri-down:after {
+bottom: -15px;
+left: 22px;
+border-top-color: #f3f3f3;
+border-width: 15px;
+}
+.upload-button{
+    padding: 10px !important;
+}
+/* Tabs */
+#tab-links{
+    position: fixed;
+    top: 45px;
+    width: 100%;
+    z-index: 2;
+}
+.tab-bar{
+    position: fixed !important;
+    width: 100%;
+    z-index: 2!important;
+}
+.tab-title{
+    color: white;
+}
+.tab-title:link{
+    color: white;
+}
+.tab-tilte:visited{
+    color: white !important;
+}
+.tab-title:hover{
+    color: white;
+    opacity: 0.8;
+}
+.tab-title:active{
+    color: white;
+}
+/*#ts_data_headerfile_format_dialog_link input[type="file"]{
+}*/
+input[type=file]{
+    position: fixed;
+    top: -100px;
+}
+.switch-on {
+  position: absolute;
+  left: -50px;
+  top: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 9px; }
+
+.switch-off {
+  position: absolute;
+  left: -20px;
+  top: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 9px; }
+/*----- Modal Tabs -----*/
+.tabs {
+    width:100%;
+    display:inline-block;
+}
+ 
+    /*----- Tab Links -----*/
+    .tab-links{
+      margin-bottom: 0px;
+    }
+    /* Clearfix */
+    .tab-links:after {
+        display:block;
+        clear:both;
+        content:'';
+    }
+ 
+    .tab-links li {
+        margin:0px 5px;
+        float:left;
+        list-style:none;
+    }
+ 
+        .tab-links a {
+            padding:9px 15px;
+            display:inline-block;
+            border-radius:3px 3px 0px 0px;
+            background:#008CBA;
+            font-size:16px;
+            font-weight:600;
+            color:#f7f7f7;
+            transition:all linear 0.15s;
+        }
+ 
+        .tab-links a:hover {
+            background:#a7cce5;
+            text-decoration:none;
+        }
+ 
+    li.active a, li.active a:hover {
+        background:#fff;
+        color:#4c4c4c;
+    }
+ 
+    /*----- Content of Tabs -----*/
+    .tab-content {
+        padding:25px;
+        border-radius:3px;
+        background:#fff;
+        height: 350px;
+        overflow: auto;
+    }
+ 
+        .tab {
+            display:none;
+        }
+ 
+        .tab.active {
+            display:block;
+        }
+#feature_selection_dialog{
+  background-color: #eaeaea;
+}
