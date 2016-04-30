@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="large-4 columns">
+                                        <div class="medium-4 columns">
                                             <label for="headerfile" id='ts_data_headerfile_format_dialog_link'>Header File
                                                 <br>
                                                 <a href="#" class="button primary upload-button" id="header_file_upload">
@@ -73,7 +73,7 @@
                                                 </label>
                                                 <input type="file" name="headerfile" id="headerfile" data-selected="#headerfile_selected"/>
                                             </div>
-                                            <div class="large-4 columns">
+                                            <div class="medium-4 columns">
                                                 <label for="zipfile" id='ts_data_tarball_format_dialog_link'>Tarball containing data
                                                     <br>
                                                     <a href="#" class="button primary upload-button" id="tarball_file_upload"><i class="fa fa-folder-open-o"></i>
@@ -81,7 +81,7 @@
                                                     </label>
                                                     <input type='file' name='zipfile' id='zipfile' class="stylized_input" data-selected="#tarball_selected">
                                                 </div>
-                                                <div class="large-2 columns">
+                                                <div class="medium-2 columns">
                                                     <label>Delimeter
                                                         <select id="sep" name="sep">
                                                             <option value=",">Comma</option>
@@ -90,7 +90,7 @@
                                                         </select>
                                                     </label>
                                                 </div>
-                                                <div class="large-2 columns">
+                                                <div class="medium-2 columns">
                                                     <label>Upload Data
                                                         <br>
                                                         <a href="#" class="button primary upload-button" id='upload_button' name='upload_button' onclick="uploadFormSubmit();">
@@ -205,43 +205,93 @@
                                                                 {% endfor %}
                                                             </div>
                                                             <div id="uploadcustomtab" style="display:none">
+                                                                Select .py file containing your custom feature definitions
+                                                                (note: file will not be used until tested. Click the test button to test your script):
+                                                                <br>
+                                                                <br>
+                                                                <div id='script_file_input_div'>
+                                                                    <label for="custom_feat_script_file">
+                                                                        <a href="#" class="button primary upload-button" id="custom_feat_script_file_upload">
+                                                                            <i class="fa fa-folder-open-o"></i>
+                                                                            Choose File</a> <span id="custom_feat_script_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
+                                                                    </label>
+                                                                        <input id='custom_feat_script_file' name='custom_feat_script_file' type='file' data-selected="#custom_feat_script_selected"/>
+                                                                    </div>
+                                                                    <br>
+                                                                    <input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>
+                                                                    <div>
+                                                                        <input type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();' value='Click to test'>
+                                                                    </div>
+                                                                    <div id='file_upload_message_div'></div>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        <a href="#" class="button primary upload-button right" style="margin-top: 10px" onclick="$('#feature_selection_dialog').foundation('reveal', 'close');">
+                                                            <i class="fa fa-check"></i>
+                                                        Done</a>
                                                     </div>
-                                                    <a href="#" class="button primary upload-button right" style="margin-top: 10px" onclick="$('#feature_selection_dialog').foundation('reveal', 'close');">
-                                                        <i class="fa fa-check"></i>
-                                                    Done</a>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="large-12 columns">
-                                                        <label>
-                                                            <a href="#" class="button primary upload-button" data-reveal-id="feature_selection_dialog">
-                                                                <i class="fa fa-crosshairs"></i>
-                                                            Select features to extract</a>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="medium-1 columns">
-                                                        <div class="switch small">
-                                                            <input id="email_user" type="checkbox" value="True" name="email_user" checked>
-                                                            <label for="email_user">
-                                                                <span class="switch-on">Yes</span>
-                                                                <span class="switch-off">No</span>
+                                                    <div class="row">
+                                                        <div class="large-12 columns">
+                                                            <label>
+                                                                <a href="#" class="button primary upload-button" data-reveal-id="feature_selection_dialog">
+                                                                    <i class="fa fa-crosshairs"></i>
+                                                                Select features to extract</a>
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div class="medium-7 columns" style="font-size: 0.875rem; padding-top: 4px">
-                                                        Receive an email notification upon featurization completion?
+                                                    <div class="row">
+                                                        <div class="medium-1 columns">
+                                                            <div class="switch small">
+                                                                <input id="email_user" type="checkbox" value="True" name="email_user" checked>
+                                                                <label for="email_user">
+                                                                    <span class="switch-on">Yes</span>
+                                                                    <span class="switch-off">No</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="medium-7 columns" style="font-size: 0.875rem; padding-top: 4px">
+                                                            Receive an email notification upon featurization completion?
+                                                        </div>
+                                                        <div class="medium-4 columns"></div>
                                                     </div>
-                                                    <div class="medium-4 columns"></div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="text-center">
-                                                        <a href="#" class="button primary upload-button" id="featurize_button" name="featurize_button" onclick="featurizeFormSubmit();"> Generate features</a>
+                                                    <div class="row">
+                                                        <div class="text-center">
+                                                            <a href="#" class="button primary upload-button" id="featurize_button" name="featurize_button" onclick="featurizeFormSubmit();"> Generate features</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <h4 class="form-heading">Featurize uploaded time series data</h4>
+                                                    <h4 class="form-heading">Featurize uploaded time series data</h4>
+                                                    <div class="row">
+                                                        <div class="large-12 columns">
+                                                            <label>Select project
+                                                                <select id="upload_project_name_select" name="upload_project_name_select">
+                                                                    {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                                                        <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                                                    {% endfor %}
+                                                                </select>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="large-12 columns">
+                                                            <label>Select featureset: </label>
+                                                            <select id="plot_features_featset_name_select" name="plot_features_featset_name_select">
+                                                                <!-- TODO -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Build model tab -->
+                            <div id='buildModelTab' class="tab">
+                                <div class="row">
+                                    <div class="large-12 columns" style="margin-top: 30px">
+                                        <div class="panel">
+                                            <h4 class="form-heading">Build Model</h4>
+                                            <form id='uploadForm' action="/uploadData" enctype="multipart/form-data" method="post">
                                                 <div class="row">
                                                     <div class="large-12 columns">
                                                         <label>Select project
@@ -255,443 +305,411 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="large-12 columns">
-                                                        <label>Select featureset: </label>
-                                                        <select id="plot_features_featset_name_select" name="plot_features_featset_name_select">
-                                                            <!-- TODO -->
-                                                        </select>
+                                                        <label>Select Model Type
+                                                            <select id="model_type_select" name="model_type_select">
+                                                                {% for model in MODEL_DESCRIPTIONS %}
+                                                                    <option value="{{ model.name }}">{{ model.name }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </label>
                                                     </div>
                                                 </div>
+                                                <!-- <input type="checkbox" name="model_use_default_params_checkbox" id="model_use_default_params_checkbox" checked>Use default model parameters</input> -->
+                                                <div class="row">
+                                                    <div class="medium-1 columns">
+                                                        <div class="switch small">
+                                                            <input id="model_use_default_params_checkbox" type="checkbox" checked>
+                                                            <label for="model_use_default_params_checkbox">
+                                                                <span class="switch-on">Yes</span>
+                                                                <span class="switch-off">No</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="medium-5 columns" style="font-size: 0.875rem; padding-top: 4px">
+                                                        Use default model parameters?
+                                                    </div>
+                                                    <div class="medium-6 columns"></div>
+                                                </div>
+                                                <!--                                         ASK STEFAN
+                                                {% for model in MODEL_DESCRIPTIONS %}
+                                                    <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
+                                                        <td colspan=3>Please see <a target="_blank" href="{{ model.url }}">{{ model.url }}</a> for parameter descriptions.</td>
+                                                    </tr>
+                                                    <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
+                                                        {% for param in model.params %}
+                                                            <td><input title="Optimize this hyperparameter" type="checkbox" id="optimize_checkbox" name="optimize_checkbox" value="{{ param.name }}" /><strong>{{ param.name }} (
+                                                            {% if param.type is sequence %}
+                                                                {% for e in param.type %}
+                                                                    {{ e.__name__ }}
+                                                                {% endfor %}
+                                                            {% else %}
+                                                                {{ param.type.__name__ }}
+                                                            {% endif %}
+                                                        ): </strong><input type="text" name="{{ model.name }}_{{ param.name }}" id="{{ model.name }}_{{ param.name }}" value="{{ param.default }}" size=6></input></td>
+                                                        {% if loop.index is divisibleby 3 %}
+                                                        </tr>
+                                                        <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endfor %} -->
+                                                <div class="row">
+                                                    <div class="large-12 columns">
+                                                        <label>Model Name
+                                                            <input type="text" placeholder="Enter a name for your new model" name='new_model_name' id='new_model_name'/>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div align='center'>
+                                                    <a href="#" class="button primary upload-button" id='model_build_submit_button' onclick="buildModelFormSubmit();"><i class="fa fa-magic"></i>&nbsp;&nbsp;Build Model </a>
+                                                </div>
+                                                <div id="model_build_okay_msg_div"></div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- Predict tab -->
                         </div>
-                        <!-- Build model tab -->
-                        <div id='buildModelTab' class="tab">
-                            <div class="row">
-                                <div class="large-12 columns" style="margin-top: 30px">
-                                    <div class="panel">
-                                        <h4 class="form-heading">Build Model</h4>
-                                        <form id='uploadForm' action="/uploadData" enctype="multipart/form-data" method="post">
-                                            <div class="row">
-                                                <div class="large-12 columns">
-                                                    <label>Select project
-                                                        <select id="upload_project_name_select" name="upload_project_name_select">
-                                                            {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                                                <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="large-12 columns">
-                                                    <label>Select Model Type
-                                                        <select id="model_type_select" name="model_type_select">
-                                                            {% for model in MODEL_DESCRIPTIONS %}
-                                                                <option value="{{ model.name }}">{{ model.name }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <!-- <input type="checkbox" name="model_use_default_params_checkbox" id="model_use_default_params_checkbox" checked>Use default model parameters</input> -->
-                                            <div class="row">
-                                                <div class="medium-1 columns">
-                                                    <div class="switch small">
-                                                        <input id="model_use_default_params_checkbox" type="checkbox" checked>
-                                                        <label for="model_use_default_params_checkbox">
-                                                            <span class="switch-on">Yes</span>
-                                                            <span class="switch-off">No</span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="medium-5 columns" style="font-size: 0.875rem; padding-top: 4px">
-                                                    Use default model parameters?
-                                                </div>
-                                                <div class="medium-6 columns"></div>
-                                            </div>
-                                            <!--                                         ASK STEFAN
-                                            {% for model in MODEL_DESCRIPTIONS %}
-                                                <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
-                                                    <td colspan=3>Please see <a target="_blank" href="{{ model.url }}">{{ model.url }}</a> for parameter descriptions.</td>
-                                                </tr>
-                                                <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
-                                                    {% for param in model.params %}
-                                                        <td><input title="Optimize this hyperparameter" type="checkbox" id="optimize_checkbox" name="optimize_checkbox" value="{{ param.name }}" /><strong>{{ param.name }} (
-                                                        {% if param.type is sequence %}
-                                                            {% for e in param.type %}
-                                                                {{ e.__name__ }}
-                                                            {% endfor %}
-                                                        {% else %}
-                                                            {{ param.type.__name__ }}
-                                                        {% endif %}
-                                                    ): </strong><input type="text" name="{{ model.name }}_{{ param.name }}" id="{{ model.name }}_{{ param.name }}" value="{{ param.default }}" size=6></input></td>
-                                                    {% if loop.index is divisibleby 3 %}
-                                                    </tr>
-                                                    <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            {% endfor %} -->
-                                            <div class="row">
-                                                <div class="large-12 columns">
-                                                    <label>Model Name
-                                                        <input type="text" placeholder="Enter a name for your new model" name='new_model_name' id='new_model_name'/>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div align='center'>
-                                                <a href="#" class="button primary upload-button" id='model_build_submit_button' onclick="buildModelFormSubmit();"><i class="fa fa-magic"></i>&nbsp;&nbsp;Build Model </a>
-                                            </div>
-                                            <div id="model_build_okay_msg_div"></div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Predict tab -->
-                    </div>
-                </section>
-                <!-- </div> -->
-            </div>
-            <BR>
-        {% endblock %}
-        {% block results %}
-            <div style='text-align:center'>
-                
-                
-                <div id='results_header' style='display:inline-block;'>
-                    <b></b>
+                    </section>
+                    <!-- </div> -->
                 </div>
                 <BR>
-                {% if RESULTS %}
-                    <br>
-                    <div id='features_link_div' style="display:none;">
-                        <a href="#" id="features_link">Show Computed Features</a>
+            {% endblock %}
+            {% block results %}
+                <div style='text-align:center'>
+                    
+                    
+                    <div id='results_header' style='display:inline-block;'>
+                        <b></b>
                     </div>
-                {% endif %}
-                <div name='lc_plot_wrapper' style='display:none;float:center;'>
-                    <div id="lc_plot" name="lc_plot" style="width:400px;height:200px;display:none;float:left;">
-                    </div>
-                    <div id="miniature" name='miniature' style="float:left;margin-left:20px;display:inline-block;">
-                        <div id="overview" name='overview' style="width:166px;height:100px">
-                        </div>
-                        <p id="overviewLegend" name='overviewLegend' style="margin-left:10px"></p>
-                    </div>
+                    <BR>
                     {% if RESULTS %}
-                        <input type='checkbox' id='show_errors_checkbox' checked name='show_errors_checkbox' onclick='plot_light_curve();'>Show error bars
+                        <br>
+                        <div id='features_link_div' style="display:none;">
+                            <a href="#" id="features_link">Show Computed Features</a>
+                        </div>
                     {% endif %}
-                </div>
-                
-                <div id="status_div" name="status_div" style="float:center;display:inline-block;">
+                    <div name='lc_plot_wrapper' style='display:none;float:center;'>
+                        <div id="lc_plot" name="lc_plot" style="width:400px;height:200px;display:none;float:left;">
+                        </div>
+                        <div id="miniature" name='miniature' style="float:left;margin-left:20px;display:inline-block;">
+                            <div id="overview" name='overview' style="width:166px;height:100px">
+                            </div>
+                            <p id="overviewLegend" name='overviewLegend' style="margin-left:10px"></p>
+                        </div>
+                        {% if RESULTS %}
+                            <input type='checkbox' id='show_errors_checkbox' checked name='show_errors_checkbox' onclick='plot_light_curve();'>Show error bars
+                        {% endif %}
+                    </div>
+                    
+                    <div id="status_div" name="status_div" style="float:center;display:inline-block;">
+                        
+                    </div>
+                    
+                    <BR><BR>
+                    <div id="model_build_results" name="model_build_results" style="float:center;display:inline-block;">
+                    </div>
+                    
+                    <BR><BR>
+                    <div id="pred_results" name="pred_results" style="float:center;display:inline-block;">
+                    </div>
+                    
+                    <BR><BR>
+                    <div align="center">
+                        <div id="visualizationDiv" name="visualizationDiv" style="float:left;display:inline-block;width:960px;">
+                        </div>
+                        <div id="visualizationLegendDiv" name="visualizationLegendDiv" style="float:left;display:inline-block;width:250px;" align="left">
+                        </div>
+                    </div>
                     
                 </div>
-                
-                <BR><BR>
-                <div id="model_build_results" name="model_build_results" style="float:center;display:inline-block;">
-                </div>
-                
-                <BR><BR>
-                <div id="pred_results" name="pred_results" style="float:center;display:inline-block;">
-                </div>
-                
-                <BR><BR>
-                <div align="center">
-                    <div id="visualizationDiv" name="visualizationDiv" style="float:left;display:inline-block;width:960px;">
-                    </div>
-                    <div id="visualizationLegendDiv" name="visualizationLegendDiv" style="float:left;display:inline-block;width:250px;" align="left">
-                    </div>
-                </div>
-                
             </div>
-        </div>
-    {% endblock %}
-    <BR><BR>
-    {% block footer %}
-        <footer class="footer" style="background-color:#c2c2c2;">
-            <div style='text-align:center;'>
-                <div style='display:inline-block;text-align:left;'>
-                    <table>
-                        <tr style='width:100%;'>
-                            <td style='width:10%;'>
-                            </td>
-                            <td style='width:25%;'>
-                                <h4 style='padding-left:40px;'>About</h4>
-                                <ul>
-                                    <li><a href="#" id='about'>Info</a></li>
-                                    <li><a href="http://astro.berkeley.edu/">UC Berkeley Astronomy</a></li>
-                                    <li><a href="http://www.stat.berkeley.edu/">UC Berkeley Statistics</a></li>
-                                    <li><a href='#' id='contact'>Contact</a></li>
-                                </ul>
-                            </td>
-                            <td style='width:25%;'>
-                                <h4 style='padding-left:40px;'>Related</h4>
-                                <ul>
-                                    <li><a href="http://dotastro.org/">DotAstro</a></li>
-                                    <li><a href="http://cftd.info/">Center For Time-Domain Informatics</a></li>
-                                    <li><a href="http://www.bigmacc.info/">Machine-learned ASAS Classification Catalog</a></li>
-                                </ul>
-                            </td>
-                            <td style='width:25%;'>
-                                <h4 style='padding-left:40px;'>Links</h4>
-                                <ul>
-                                    <li><a href='http://timemachine.iic.harvard.edu/'>Harvard TSC</a></li>
-                                    <li><a href="http://simbad.u-strasbg.fr/simbad/">SIMBAD</a></li>
-                                    <li><a href="http://www.sai.msu.su/gcvs/gcvs/index.htm">GCVS</a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                    </table>
+        {% endblock %}
+        <BR><BR>
+        {% block footer %}
+            <footer class="footer" style="background-color:#c2c2c2;">
+                <div style='text-align:center;'>
+                    <div style='display:inline-block;text-align:left;'>
+                        <table>
+                            <tr style='width:100%;'>
+                                <td style='width:10%;'>
+                                </td>
+                                <td style='width:25%;'>
+                                    <h4 style='padding-left:40px;'>About</h4>
+                                    <ul>
+                                        <li><a href="#" id='about'>Info</a></li>
+                                        <li><a href="http://astro.berkeley.edu/">UC Berkeley Astronomy</a></li>
+                                        <li><a href="http://www.stat.berkeley.edu/">UC Berkeley Statistics</a></li>
+                                        <li><a href='#' id='contact'>Contact</a></li>
+                                    </ul>
+                                </td>
+                                <td style='width:25%;'>
+                                    <h4 style='padding-left:40px;'>Related</h4>
+                                    <ul>
+                                        <li><a href="http://dotastro.org/">DotAstro</a></li>
+                                        <li><a href="http://cftd.info/">Center For Time-Domain Informatics</a></li>
+                                        <li><a href="http://www.bigmacc.info/">Machine-learned ASAS Classification Catalog</a></li>
+                                    </ul>
+                                </td>
+                                <td style='width:25%;'>
+                                    <h4 style='padding-left:40px;'>Links</h4>
+                                    <ul>
+                                        <li><a href='http://timemachine.iic.harvard.edu/'>Harvard TSC</a></li>
+                                        <li><a href="http://simbad.u-strasbg.fr/simbad/">SIMBAD</a></li>
+                                        <li><a href="http://www.sai.msu.su/gcvs/gcvs/index.htm">GCVS</a></li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        {% endblock %}
     {% endblock %}
-{% endblock %}
-{% block bodyscript %}
-    <script type="text/javascript">
-    $(document).ready(function() {
-    $(function() {
-    $( document ).tooltip();
+    {% block bodyscript %}
+        <script type="text/javascript">
+        $(document).ready(function() {
+        $(function() {
+        $( document ).tooltip();
+        });
+        $("#plot_features_form_table").width($("#featurize_data_table").width());
+        init_dialogs();
+        form_validations();
+        enforce_unique_name('new_project_button','new_project_name','new_proj_name_okay_div',{{ CURRENT_PROJECTS_JSON|safe }});
+        populate_select_options_multiple();
+        $('#model_type_select').change(function(){
+        var x = this.value;
+        $(".model_params_tr").removeClass("currently_selected");
+        $(".model_params_tr_" + x).addClass("currently_selected");
+        $(".model_params_tr").hide();
+        if(!document.getElementById('model_use_default_params_checkbox').checked){
+        $(".model_params_tr.currently_selected").show(); }
+        });
+        $('#model_type_select').trigger("change");
+        $('#model_use_default_params_checkbox').change(function(){
+        if(this.checked){
+        $(".model_params_tr.currently_selected").hide();
+        }else{
+        $(".model_params_tr.currently_selected").show();
+        }
+        });
+        //     var feature_selection_html_str = "<div id='feature_selection_dialog_tabs'> \
+            //         <ul> \
+                //             <li><a href='#featureset1tab'>Feature set 1</a></li> \
+                //             <li><a href='#featureset2tab'>Feature set 2</a></li> \
+                //             <li><a href='#uploadcustomtab'>Upload custom feature definitions</a></li> \
+            //         </ul> \
+        //     </div> \
+        //     <div id='featureset2tab'> \
+        //     </div> \
+        //     <div id='uploadcustomtab'> \
+        //     </div> \
+    // </div> ";
+    // $('#feature_selection_dialog').html(feature_selection_html_str);
+    // var featureset1_html_str = "<a href='#' onclick='select_deselect_all_feats1();'>Click here to select/deselect all</a><br><br>";
+    // {% for FEAT in FEATURES_AVAILABLE[0] %}
+        //     featureset1_html_str += "<input id='features_selected' type='checkbox' name='features_selected' value='{{ FEAT }}' checked> \
+        //     {{ FEAT }}<br> \
+        //     <label for='features_selected'> \
+            //         <span class='switch-on'>Yes</span> \
+            //         <span class='switch-off'>No</span> \
+        //     </label>"
+    // {% endfor %}
+    // $('#featureset1tab').html(featureset1_html_str);
+    // var featureset2_html_str = "<a href='#' onclick='select_deselect_all_feats2();'>Click here to select/deselect all</a><br><br>";
+    // {% for FEAT in FEATURES_AVAILABLE[1] %}
+        //     featureset2_html_str += "<input type='checkbox' class='feat2_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>{{ FEAT }}<br>"
+    // {% endfor %}
+    // $('#featureset2tab').html(featureset2_html_str);
+    // var customfeats_html_str = "Select .py file containing your custom feature definitions \
+    // (note: file will not be used until tested. Click the test button to test your script): \
+    // <br><br><div id='script_file_input_div'><input id='custom_feat_script_file' name='custom_feat_script_file' type='file'></div><br>\
+    // <input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>\
+    // <div><input type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();' value='Click to test'></div>\
+    // <div id='file_upload_message_div'></div>"
+    // $('#uploadcustomtab').html(customfeats_html_str);
+    $('#feature_selection_dialog').parent().appendTo($("#featurizeForm"));
+    // $("#feature_selection_dialog_tabs").tabs();
+    $('#header_file_upload #tarball_file_upload').click(function(){
+    $('input[type=file]').trigger('click');
     });
-    $("#plot_features_form_table").width($("#featurize_data_table").width());
-    init_dialogs();
-    form_validations();
-    enforce_unique_name('new_project_button','new_project_name','new_proj_name_okay_div',{{ CURRENT_PROJECTS_JSON|safe }});
-    populate_select_options_multiple();
-    $('#model_type_select').change(function(){
-    var x = this.value;
-    $(".model_params_tr").removeClass("currently_selected");
-    $(".model_params_tr_" + x).addClass("currently_selected");
-    $(".model_params_tr").hide();
-    if(!document.getElementById('model_use_default_params_checkbox').checked){
-    $(".model_params_tr.currently_selected").show(); }
     });
-    $('#model_type_select').trigger("change");
-    $('#model_use_default_params_checkbox').change(function(){
-    if(this.checked){
-    $(".model_params_tr.currently_selected").hide();
-    }else{
-    $(".model_params_tr.currently_selected").show();
-    }
-    });
-    //     var feature_selection_html_str = "<div id='feature_selection_dialog_tabs'> \
-        //         <ul> \
-            //             <li><a href='#featureset1tab'>Feature set 1</a></li> \
-            //             <li><a href='#featureset2tab'>Feature set 2</a></li> \
-            //             <li><a href='#uploadcustomtab'>Upload custom feature definitions</a></li> \
-        //         </ul> \
-    //     </div> \
-    //     <div id='featureset2tab'> \
-    //     </div> \
-    //     <div id='uploadcustomtab'> \
-    //     </div> \
-// </div> ";
-// $('#feature_selection_dialog').html(feature_selection_html_str);
-// var featureset1_html_str = "<a href='#' onclick='select_deselect_all_feats1();'>Click here to select/deselect all</a><br><br>";
-// {% for FEAT in FEATURES_AVAILABLE[0] %}
-    //     featureset1_html_str += "<input id='features_selected' type='checkbox' name='features_selected' value='{{ FEAT }}' checked> \
-    //     {{ FEAT }}<br> \
-    //     <label for='features_selected'> \
-        //         <span class='switch-on'>Yes</span> \
-        //         <span class='switch-off'>No</span> \
-    //     </label>"
-// {% endfor %}
-// $('#featureset1tab').html(featureset1_html_str);
-// var featureset2_html_str = "<a href='#' onclick='select_deselect_all_feats2();'>Click here to select/deselect all</a><br><br>";
-// {% for FEAT in FEATURES_AVAILABLE[1] %}
-    //     featureset2_html_str += "<input type='checkbox' class='feat2_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>{{ FEAT }}<br>"
-// {% endfor %}
-// $('#featureset2tab').html(featureset2_html_str);
-var customfeats_html_str = "Select .py file containing your custom feature definitions \
-(note: file will not be used until tested. Click the test button to test your script): \
-<br><br><div id='script_file_input_div'><input id='custom_feat_script_file' name='custom_feat_script_file' type='file'></div><br>\
-<input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>\
-<div><input type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();' value='Click to test'></div>\
-<div id='file_upload_message_div'></div>"
-$('#uploadcustomtab').html(customfeats_html_str);
-$('#feature_selection_dialog').parent().appendTo($("#featurizeForm"));
-// $("#feature_selection_dialog_tabs").tabs();
-$('#header_file_upload #tarball_file_upload').click(function(){
-$('input[type=file]').trigger('click');
-});
-});
-{% if RESULTS %}
-    
-    {% if ACTION == "buildingModel" %}
+    {% if RESULTS %}
         
-        $(document).ready(function(){
+        {% if ACTION == "buildingModel" %}
+            
+            $(document).ready(function(){
+            
+            
+            var index = $('#tabs a[href="#buildModelTab"]').parent().index();
+            $('#tabs').tabs( "option", "active", false);
+            
+            $("#results_header").html("<b>Model Creation for {{ model_name }}:</b>");
+            
+            
+            var checkStatus = setInterval(
+            function(){
+            var job_status_str = check_job_status({{ PID }});
+            $("#status_div").html(job_status_str);
+            if( job_status_str.indexOf("finished") != -1) {
+            
+            $("#model_build_results").html("Loading results...");
+            
+            $.get("/load_model_build_results/{{ new_model_key }}", function(data){
+            
+            $("#model_build_results").html(data["results_msg"]);
+            
+            });
+            
+            
+            clearInterval(checkStatus);
+            }
+            }
+            , 1000);
+            
+            
+            });
+            
+            
+            
+            
+            
+            {% elif ACTION == "PLOT_FEATURES" %}
+            
+            $(document).ready(function(){
+            
+            var index = $('#tabs a[href="#featurizeTab"]').parent().index();
+            $('#tabs').tabs( "option", "active", false);
+            
+            $("#results_header").html("<b>{{ PROJECT_NAME }}:</b>");
+            
+            $("#model_build_results").hide();
+            $("#pred_results").hide();
+            
+            drawScatterplotMatrix("/features_data/{{ PROJECT_NAME }}_features_with_targets.csv");
+            
+            });
+            
+            
+            
+            
+            
+            
+            
+            {% elif ACTION == "featurizing" %}
+            
+            $(document).ready(function(){
+            
+            $('#results_header').html("<b>Generating features for new feature set {{ featureset_name }}:</b>");
+            
+            $('#tabs').tabs( "option", "active", false);
+            
+            var checkStatus = setInterval(
+            function(){
+            var job_status_str = check_job_status({{ PID }});
+            $("#status_div").html(job_status_str);
+            if( job_status_str.indexOf("finished") != -1) {
+            $("#model_build_results").html("Loading results...");
+            
+            $.get("/load_featurization_results/{{ new_featset_key }}", function(data){
+            
+            $("#model_build_results").html(data["results_msg"]);
+            
+            });
+            $('#tabs').tabs( "option", "active", false);
+            drawScatterplotMatrix("/features_data/{{ new_featset_key }}_features_with_targets.csv");
+            clearInterval(checkStatus);
+            }
+            }
+            , 1000);
+            
+            });
+            {% elif ACTION == "uploaded" %}
+            $(document).ready(function(){
+            $('#results_header').html("<b>New feature set {{ featureset_name }} uploaded.</b>");
+            $('#tabs').tabs( "option", "active", false);
+            });
+            
+            
+            
+            
+            
+            {% elif ACTION == "predicting" %}
+            
+            $(document).ready(function(){
+            
+            $('#tabs').tabs( "option", "active", false);
+            
+            $("#results_header").html("<b>Prediction Results for model {{ prediction_model_name }} - {{ model_type }}</b>");
+            
+            $("#model_build_results").html("<img src='/static/media/spinner_black.gif'> Featurizing your new time series data and performing model predictions.");
+            $("#status_div").html("<img src='/static/media/spinner_black.gif'> Featurizing your new time series data...");
+            
+            var checkStatus = setInterval(
+            function(){
+            var job_status_str = check_job_status({{ PID }});
+            $("#status_div").html(job_status_str);
+            if( job_status_str.indexOf("finished") != -1) {
+            $("#model_build_results").html("Featurization and prediction complete.").show();
+            
+            $.get("/load_prediction_results/{{ prediction_entry_key }}", function(data){
+            console.log(data["pred_results_dict"]);
+            generate_pred_results_table("#pred_results", data["pred_results_dict"]);
+            
+            $("#pred_results_table").tablesorter();
+            
+            $(".pred_results_fname_cell").click( function(){
+            window.open("/source_details/"+data['id']+"/"+$(this).text(), "_blank");
+            });
+            
+            });
+            
+            clearInterval(checkStatus);
+            }
+            }
+            , 1000);
+            
+            
+            });
+            
+            
+            
+            
+            
+            
+        {% else %}
+            $(document).ready(function(){
+            
+            
+            
+            $('#tabs').tabs( "option", "active", 0);
+            
+            $("#survey_pred_results").html("<img src='/static/media/spinner_black.gif'> Processing survey classification...");
+            $("#pred_results").html("<img src='/static/media/spinner_black.gif'> Processing science classification...");
+            
+            plot_light_curve();
+            
+            $("#pred_results").load("/classPred", function(){
+            $("#features").load("/features", function(){
+            $("#features_link_div").show();
+            });
+            $.get("/featuresDict", function(data){
+            draw_lines(data.avg_err, data.cads_med, data.avg_double_to_single_step, data.cads_std);
+            });
+            });
+            
+            
+            });
+            
+        {% endif %}
         
-        
-        var index = $('#tabs a[href="#buildModelTab"]').parent().index();
-        $('#tabs').tabs( "option", "active", false);
-        
-        $("#results_header").html("<b>Model Creation for {{ model_name }}:</b>");
-        
-        
-        var checkStatus = setInterval(
-        function(){
-        var job_status_str = check_job_status({{ PID }});
-        $("#status_div").html(job_status_str);
-        if( job_status_str.indexOf("finished") != -1) {
-        
-        $("#model_build_results").html("Loading results...");
-        
-        $.get("/load_model_build_results/{{ new_model_key }}", function(data){
-        
-        $("#model_build_results").html(data["results_msg"]);
-        
-        });
-        
-        
-        clearInterval(checkStatus);
-        }
-        }
-        , 1000);
-        
-        
-        });
-        
-        
-        
-        
-        
-        {% elif ACTION == "PLOT_FEATURES" %}
-        
-        $(document).ready(function(){
-        
-        var index = $('#tabs a[href="#featurizeTab"]').parent().index();
-        $('#tabs').tabs( "option", "active", false);
-        
-        $("#results_header").html("<b>{{ PROJECT_NAME }}:</b>");
-        
-        $("#model_build_results").hide();
-        $("#pred_results").hide();
-        
-        drawScatterplotMatrix("/features_data/{{ PROJECT_NAME }}_features_with_targets.csv");
-        
-        });
-        
-        
-        
-        
-        
-        
-        
-        {% elif ACTION == "featurizing" %}
-        
-        $(document).ready(function(){
-        
-        $('#results_header').html("<b>Generating features for new feature set {{ featureset_name }}:</b>");
-        
-        $('#tabs').tabs( "option", "active", false);
-        
-        var checkStatus = setInterval(
-        function(){
-        var job_status_str = check_job_status({{ PID }});
-        $("#status_div").html(job_status_str);
-        if( job_status_str.indexOf("finished") != -1) {
-        $("#model_build_results").html("Loading results...");
-        
-        $.get("/load_featurization_results/{{ new_featset_key }}", function(data){
-        
-        $("#model_build_results").html(data["results_msg"]);
-        
-        });
-        $('#tabs').tabs( "option", "active", false);
-        drawScatterplotMatrix("/features_data/{{ new_featset_key }}_features_with_targets.csv");
-        clearInterval(checkStatus);
-        }
-        }
-        , 1000);
-        
-        });
-        {% elif ACTION == "uploaded" %}
-        $(document).ready(function(){
-        $('#results_header').html("<b>New feature set {{ featureset_name }} uploaded.</b>");
-        $('#tabs').tabs( "option", "active", false);
-        });
-        
-        
-        
-        
-        
-        {% elif ACTION == "predicting" %}
-        
-        $(document).ready(function(){
-        
-        $('#tabs').tabs( "option", "active", false);
-        
-        $("#results_header").html("<b>Prediction Results for model {{ prediction_model_name }} - {{ model_type }}</b>");
-        
-        $("#model_build_results").html("<img src='/static/media/spinner_black.gif'> Featurizing your new time series data and performing model predictions.");
-        $("#status_div").html("<img src='/static/media/spinner_black.gif'> Featurizing your new time series data...");
-        
-        var checkStatus = setInterval(
-        function(){
-        var job_status_str = check_job_status({{ PID }});
-        $("#status_div").html(job_status_str);
-        if( job_status_str.indexOf("finished") != -1) {
-        $("#model_build_results").html("Featurization and prediction complete.").show();
-        
-        $.get("/load_prediction_results/{{ prediction_entry_key }}", function(data){
-        console.log(data["pred_results_dict"]);
-        generate_pred_results_table("#pred_results", data["pred_results_dict"]);
-        
-        $("#pred_results_table").tablesorter();
-        
-        $(".pred_results_fname_cell").click( function(){
-        window.open("/source_details/"+data['id']+"/"+$(this).text(), "_blank");
-        });
-        
-        });
-        
-        clearInterval(checkStatus);
-        }
-        }
-        , 1000);
+        {% elif PROCESS_STATUS %}
         
         
-        });
-        
-        
-        
-        
+        var checkStatus = setInterval(function(){ $("#survey_pred_results").html(check_job_status({{ PID }}); ); }, 1000);
         
         
     {% else %}
-        $(document).ready(function(){
-        
-        
-        
-        $('#tabs').tabs( "option", "active", 0);
-        
-        $("#survey_pred_results").html("<img src='/static/media/spinner_black.gif'> Processing survey classification...");
-        $("#pred_results").html("<img src='/static/media/spinner_black.gif'> Processing science classification...");
-        
-        plot_light_curve();
-        
-        $("#pred_results").load("/classPred", function(){
-        $("#features").load("/features", function(){
-        $("#features_link_div").show();
-        });
-        $.get("/featuresDict", function(data){
-        draw_lines(data.avg_err, data.cads_med, data.avg_double_to_single_step, data.cads_std);
-        });
-        });
-        
-        
-        });
-        
     {% endif %}
-    
-    {% elif PROCESS_STATUS %}
-    
-    
-    var checkStatus = setInterval(function(){ $("#survey_pred_results").html(check_job_status({{ PID }}); ); }, 1000);
-    
-    
-{% else %}
-{% endif %}
-</script>
+    </script>
 {% endblock %}
