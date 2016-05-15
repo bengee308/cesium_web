@@ -111,8 +111,8 @@ border-width: 15px;
 /*#ts_data_headerfile_format_dialog_link input[type="file"]{
 }*/
 input[type=file]{
-    /*position: fixed;*/
-    /*top: -100px;*/
+    position: fixed;
+    top: -100px;
 }
 .switch-on {
   position: absolute;
@@ -191,4 +191,10 @@ input[type=file]{
         }
 #feature_selection_dialog{
   background-color: #eaeaea;
+}
+.form-heading{
+    text-align: left;
+}
+.header-label{
+    text-align: left;
 }

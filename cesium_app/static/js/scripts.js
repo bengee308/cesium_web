@@ -585,7 +585,8 @@ function enforce_unique_name(button_id,text_field_id,msg_div_id,names_list){
 function resetFormElement(e){
     e.wrap("<form>").closest("form").get(0).reset();
     e.unwrap();
-
+    var span = e.attr("data-selected");
+    $(span).text("No file selected.");
 }
 
 

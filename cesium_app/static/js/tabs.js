@@ -36,13 +36,14 @@ $(document).ready(function() {
         // Change/remove current tab to active
         $(this).parent('li').addClass('active').siblings().removeClass('active');
     });
-    $("label[for='headerfile'], label[for='zipfile'], label[for='custom_feat_script_file']").click(function(e){
+    $("#header_file_upload, #tarball_file_upload").click(function(e){
     	e.preventDefault();
-    	var fileTarget = $(this).attr("for");
+    	var fileTarget = $(this).attr("data-target");
     	$("#"+ fileTarget).click();
     	console.log($("#"+ fileTarget).val());
     });
     $("#headerfile, #zipfile, #custom_feat_script_file").change(function(){
+        console.log("changed");
     	var path = $(this).val();
     	var filename = path.replace(/^.*\\/, "");
     	var span = $(this).attr("data-selected");

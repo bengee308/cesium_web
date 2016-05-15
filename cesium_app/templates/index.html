@@ -121,64 +121,102 @@
                 </form>
             </div>
             <!-- Upload data tab -->
-            <div id='uploadTab' align='center'>
-                <form id='uploadForm' action="/uploadData" enctype="multipart/form-data" method="post">
-                    <table id='upload_data_table'>
-                        <tr>
-                            <td align='left'><i><h3>Upload new time series data:</h3></i></td>
-                        </tr>
-                        <tr>
-                            <td align='left' colspan=2>
-                                <div><label>Select project:</label>
-                                <select id="upload_project_name_select" name="upload_project_name_select">
-                                    {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                        <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
-                                    {% endfor %}
-                                    
-                                </select>
+            <div id='uploadTab'>
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="panel">
+                        <h4 class="form-heading">Upload new time series data</h4>
+                        <form id='uploadForm' action="/uploadData" enctype="multipart/form-data" method="post">
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label class="header-label">Select project:
+                                        <select id="upload_project_name_select" name="upload_project_name_select">
+                                            {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                                <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </label>   
+                                </div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align='left'>
-                            <label>Dataset Title<span class='small'>Enter a title for your data set:</span></label>
-                        </td>
-                        <td>
-                            <div id="dataset_name_div" style='border:1px solid #BBB;'><input type='text' name='dataset_name' id='dataset_name' class="stylized_input"></div><div id='dataset_name_okay_div' name='dataset_name_okay_div'></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align='left'>
-                            <label id='ts_data_headerfile_format_dialog_link'>Header File (click for required format)<span class='small'>Select file to upload:</span></label>
-                        </td>
-                        <td>
-                            <div id="headerfile_div" style='border:1px solid #BBB;'><input type='file' name='headerfile' id='headerfile' class="stylized_input"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align='left'>
-                            <label id='ts_data_tarball_format_dialog_link'>Tarball containing data (click for required format)<span class='small'>Select file to upload:</span></label>
-                        </td>
-                        <td>
-                            <div id="zipfile_div" style='border:1px solid #BBB;'><input type='file' name='zipfile' id='zipfile' class="stylized_input"></div>
-                        </td>
-                        
-                        <td>
-                            <div id="sep_select_div" title="Delimiter character in time series files."><label>Delimiter: </label>
-                            <select id="sep" name="sep">
-                                <option value=",">Comma</option>
-                                <option value="\t">Tab</option>
-                                <option value=" ">Space</option>
-                            </select></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan=3 align='center'>
-                            <div align='center'><input type='button' id='upload_button' name='upload_button' value='Upload data' class='submit_button' onclick="uploadFormSubmit();" ></div>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label class="header-label">Dataset Title
+                                    <div id="dataset_name_div"><input type='text' name='dataset_name' id='dataset_name' class="stylized_input" placeholder="Enter a title for your dataset"></div><div id='dataset_name_okay_div' name='dataset_name_okay_div'></div>
+                                    </label>
+                                </div>
+                            </div>
+                                <!-- </td> -->
+                            <!-- </tr> -->
+                            <!-- <tr> -->
+                                <!-- <td align='left'> -->
+                                    <!-- <label id='ts_data_headerfile_format_dialog_link'>Header File (click for required format)<span class='small'>Select file to upload:</span></label> -->
+                                <!-- </td> -->
+                                <!-- <td> -->
+                                    <!-- <div id="headerfile_div" style='border:1px solid #BBB;'><input type='file' name='headerfile' id='headerfile' class="stylized_input"></div> -->
+                                <!-- </td> -->
+                            <!-- </tr> -->
+                            <!-- <tr> -->
+                                <!-- <td align='left'> -->
+                                    <!-- <label id='ts_data_tarball_format_dialog_link'>Tarball containing data (click for required format)<span class='small'>Select file to upload:</span></label> -->
+                                <!-- </td> -->
+                                <!-- <td> -->
+                                    <!-- <div id="zipfile_div" style='border:1px solid #BBB;'><input type='file' name='zipfile' id='zipfile' class="stylized_input"></div> -->
+                                <!-- </td> -->
+                                
+                                <!-- <td> -->
+                                    <div id="sep_select_div" title="Delimiter character in time series files."><label>Delimiter: </label>
+                                    <select id="sep" name="sep">
+                                        <option value=",">Comma</option>
+                                        <option value="\t">Tab</option>
+                                        <option value=" ">Space</option>
+                                    </select></div>
+                                    <div class="row">
+                                        <div class="medium-4 columns">
+                                            <label for="headerfile" id='ts_data_headerfile_format_dialog_link'>Header File</label>
+                                                <br>
+                                                <a href="#" class="button primary upload-button" id="header_file_upload" data-target="headerfile">
+                                                    <i class="fa fa-folder-open-o"></i>
+                                                    Choose File</a> <span id="headerfile_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
+                                                
+                                                <input type="file" name="headerfile" id="headerfile" data-selected="#headerfile_selected"/>
+                                            </div>
+                                            <div class="medium-4 columns">
+                                                <label for="zipfile" id='ts_data_tarball_format_dialog_link'>Tarball containing data</label>
+                                                    <br>
+                                                    <a href="#" class="button primary upload-button" id="tarball_file_upload" data-target="zipfile"><i class="fa fa-folder-open-o"></i>
+                                                        Choose File</a> <span id="tarball_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
+                                                    <input type='file' name='zipfile' id='zipfile' class="stylized_input" data-selected="#tarball_selected">
+                                                </div>
+                                                <div class="medium-2 columns">
+                                                    <label>Delimeter
+                                                        <select id="sep" name="sep">
+                                                            <option value=",">Comma</option>
+                                                            <option value="\t">Tab</option>
+                                                            <option value=" ">Space</option>
+                                                        </select>
+                                                    </label>
+                                                </div>
+                                                <div class="medium-2 columns">
+                                                    <label>Upload Data
+                                                        <br>
+                                                        <a href="#" class="button primary upload-button" id='upload_button' name='upload_button' onclick="uploadFormSubmit();">
+                                                            <i class="fa fa-upload"></i>
+                                                        Upload</a>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                <!-- </td> -->
+                            <!-- </tr> -->
+                            <!-- <tr> -->
+                                <!-- <td colspan=3 align='center'> -->
+                                    <div align='center'><input type='button' id='upload_button' name='upload_button' value='Upload data' class='submit_button' onclick="uploadFormSubmit();" ></div>
+                                <!-- </td> -->
+                            <!-- </tr> -->
+                        <!-- </table> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
             <BR><BR>
             <form id='transformDataForm' action="/transformData" enctype="multipart/form-data" method="post">
                 <table id='transform_data_form_table'>
