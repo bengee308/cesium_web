@@ -145,75 +145,44 @@
                                     </label>
                                 </div>
                             </div>
-                                <!-- </td> -->
-                            <!-- </tr> -->
-                            <!-- <tr> -->
-                                <!-- <td align='left'> -->
-                                    <!-- <label id='ts_data_headerfile_format_dialog_link'>Header File (click for required format)<span class='small'>Select file to upload:</span></label> -->
-                                <!-- </td> -->
-                                <!-- <td> -->
-                                    <!-- <div id="headerfile_div" style='border:1px solid #BBB;'><input type='file' name='headerfile' id='headerfile' class="stylized_input"></div> -->
-                                <!-- </td> -->
-                            <!-- </tr> -->
-                            <!-- <tr> -->
-                                <!-- <td align='left'> -->
-                                    <!-- <label id='ts_data_tarball_format_dialog_link'>Tarball containing data (click for required format)<span class='small'>Select file to upload:</span></label> -->
-                                <!-- </td> -->
-                                <!-- <td> -->
-                                    <!-- <div id="zipfile_div" style='border:1px solid #BBB;'><input type='file' name='zipfile' id='zipfile' class="stylized_input"></div> -->
-                                <!-- </td> -->
-                                
-                                <!-- <td> -->
-                                    <div id="sep_select_div" title="Delimiter character in time series files."><label>Delimiter: </label>
-                                    <select id="sep" name="sep">
-                                        <option value=",">Comma</option>
-                                        <option value="\t">Tab</option>
-                                        <option value=" ">Space</option>
-                                    </select></div>
-                                    <div class="row">
-                                        <div class="medium-4 columns">
-                                            <label for="headerfile" id='ts_data_headerfile_format_dialog_link'>Header File</label>
+                            <div class="row">
+                                <div class="medium-4 columns">
+                                    <label for="headerfile" class="header-label">Header File
+                                        <br>
+                                        <a href="#" class="button primary upload-button" id="header_file_upload" data-target="headerfile">
+                                            <i class="fa fa-folder-open-o"></i>
+                                            Choose File</a> <span id="headerfile_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
+                                        
+                                        <input type="file" name="headerfile" id="headerfile" data-selected="#headerfile_selected"/>
+                                    </label>
+                                </div>
+                                    <div class="medium-4 columns">
+                                        <label for="zipfile" class="header-label">Tarball containing data
+                                            <br>
+                                            <a href="#" class="button primary upload-button" id="tarball_file_upload" data-target="zipfile"><i class="fa fa-folder-open-o"></i>
+                                                Choose File</a> <span id="tarball_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
+                                            <input type='file' name='zipfile' id='zipfile' class="stylized_input" data-selected="#tarball_selected">
+                                        </label>
+                                    </div>
+                                        <div class="medium-2 columns">
+                                            <label class="header-label">Delimeter
+                                                <select id="sep" name="sep">
+                                                    <option value=",">Comma</option>
+                                                    <option value="\t">Tab</option>
+                                                    <option value=" ">Space</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div class="medium-2 columns">
+                                            <label class="header-label">Upload Data
                                                 <br>
-                                                <a href="#" class="button primary upload-button" id="header_file_upload" data-target="headerfile">
-                                                    <i class="fa fa-folder-open-o"></i>
-                                                    Choose File</a> <span id="headerfile_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
-                                                
-                                                <input type="file" name="headerfile" id="headerfile" data-selected="#headerfile_selected"/>
-                                            </div>
-                                            <div class="medium-4 columns">
-                                                <label for="zipfile" id='ts_data_tarball_format_dialog_link'>Tarball containing data</label>
-                                                    <br>
-                                                    <a href="#" class="button primary upload-button" id="tarball_file_upload" data-target="zipfile"><i class="fa fa-folder-open-o"></i>
-                                                        Choose File</a> <span id="tarball_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
-                                                    <input type='file' name='zipfile' id='zipfile' class="stylized_input" data-selected="#tarball_selected">
-                                                </div>
-                                                <div class="medium-2 columns">
-                                                    <label>Delimeter
-                                                        <select id="sep" name="sep">
-                                                            <option value=",">Comma</option>
-                                                            <option value="\t">Tab</option>
-                                                            <option value=" ">Space</option>
-                                                        </select>
-                                                    </label>
-                                                </div>
-                                                <div class="medium-2 columns">
-                                                    <label>Upload Data
-                                                        <br>
-                                                        <a href="#" class="button primary upload-button" id='upload_button' name='upload_button' onclick="uploadFormSubmit();">
-                                                            <i class="fa fa-upload"></i>
-                                                        Upload</a>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                <!-- </td> -->
-                            <!-- </tr> -->
-                            <!-- <tr> -->
-                                <!-- <td colspan=3 align='center'> -->
-                                    <div align='center'><input type='button' id='upload_button' name='upload_button' value='Upload data' class='submit_button' onclick="uploadFormSubmit();" ></div>
-                                <!-- </td> -->
-                            <!-- </tr> -->
-                        <!-- </table> -->
-                        </form>
+                                                <a href="#" class="button primary upload-button" id='upload_button' name='upload_button' onclick="uploadFormSubmit();">
+                                                    <i class="fa fa-upload"></i>
+                                                Upload</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                            </form>
                     </div>
                 </div>
             </div>
