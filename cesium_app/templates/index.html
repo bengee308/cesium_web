@@ -227,41 +227,108 @@
         </div>
     </div>
     <!-- Features tab -->
-    <div id='featurizeTab' align='center'>
+    <div id='featurizeTab'>
+        <div class="row">
+        <div class="large-12 columns" style="margin-top: 30px">
+            <div class="panel">
+                <h4 class="form-heading">Featurize uploaded time series data</h4>
         <form id='featurizeForm' action="/FeaturizeData" enctype="multipart/form-data" method="post">
-            <table id='featurize_data_table'>
-                <tr><td align='left'><i><h3>Featurize uploaded time series data:</h3></i></td>
-            </tr>
-            <tr>
-                <td align='left' colspan=2>
-                    <div><label>Select project:</label>
-                    <select id="featureset_project_name_select" name="featureset_project_name_select">
-                        {% for PROJ_NAME in CURRENT_PROJECTS %}
-                            <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
-                        {% endfor %}
-                    </select>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label class="header-label">Select project
+                        <select id="featureset_project_name_select" name="upload_project_name_select">
+                            {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                            {% endfor %}
+                        </select>
+                    </label>
                 </div>
-            </td>
-        </tr>
-        <tr>
-            <td align='left' colspan=2>
-                <div><label>Select dataset:</label>
-                <select id="featureset_dataset_select" name="featureset_dataset_select">
-                </select>
             </div>
-        </td>
-    </tr>
-    <tr>
-        <td align='left'>
-            <label>Feature Set Title<span class='small'>Enter a title for your feature set:</span></label>
-        </td>
-        <td>
-            <div id="featset_name_div" style='border:1px solid #BBB;'><input type='text' name='featureset_name' id='featureset_name' class="stylized_input"></div><div id='featset_name_okay_div' name='featset_name_okay_div'></div>
-        </td>
-        <td>
-            <div title="If this is checked, only the first 10 files will be featurized."><input type="checkbox" checked name="is_test" id="is_test" value="True"><label>Test run</label></div>
-        </td>
-    </tr>
+            <div class="row">
+                <div class="medium-12 columns">
+                    <label class="header-label">Select dataset</label>
+                        <select id="featureset_dataset_select" name="featureset_dataset_select">
+                        </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="medium-10 columns">
+                    <label class="header-label">Feature Set Title
+                        <input type="text" placeholder="Enter a title for your feature set" name='featureset_name' id='featureset_name'/>
+                    </label>
+                    <div id='featset_name_okay_div' name='featset_name_okay_div'></div>
+                </div>
+                <div class="medium-2 columns">
+                    <label class="header-label">Test run</label>
+                    <div class="switch small">
+                        <input id="is_test" type="checkbox" value="True" name="is_test" checked>
+                        <label for="is_test">
+                            <span class="switch-on">Yes</span>
+                            <span class="switch-off">No</span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div id="feature_selection_dialog" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                <h3 id="modalTitle">Feature Selection</h3>
+                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                <div class="tabs">
+                    <ul class="tab-links" id="feature-tab-links">
+                        <li class="active"><a href="#featureset1tab">Feature set 1</a></li>
+                        <li><a href="#featureset2tab">Feature set 2</a></li>
+                        <li> <a href="#uploadcustomtab">Upload custom feature definitions</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="featureset1tab">
+                            <a href='#' onclick='select_deselect_all_feats1();'>Click here to select/deselect all</a><br><br>
+                            {% for FEAT in FEATURES_AVAILABLE[0] %}
+                                <input id='features_selected' class='feat1_checkbox' type='checkbox' name='features_selected' value='{{ FEAT }}' checked>
+                                {{ FEAT }}<br>
+                            {% endfor %}
+                        </div>
+                        <div id="featureset2tab" style="display:none">
+                            <a href='#' onclick='select_deselect_all_feats2();'>Click here to select/deselect all</a><br><br>
+                            {% for FEAT in FEATURES_AVAILABLE[1] %}
+                                <input type='checkbox' class='feat2_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>&nbsp;{{ FEAT }}<br>
+                            {% endfor %}
+                        </div>
+                        <div id="uploadcustomtab" style="display:none">
+                            Select .py file containing your custom feature definitions
+                            (note: file will not be used until tested. Click the test button to test your script):
+                            <br>
+                            <br>
+                            <div id='script_file_input_div'>
+                                <label for="custom_feat_script_file">
+                                    <a href="#" class="button primary upload-button" id="custom_feat_script_file_upload">
+                                        <i class="fa fa-folder-open-o"></i>
+                                        Choose File</a> <span id="custom_feat_script_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
+                                </label>
+                                    <input id='custom_feat_script_file' name='custom_feat_script_file' type='file' data-selected="#custom_feat_script_selected"/>
+                                </div>
+                                <br>
+                                <input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>
+                                <div>
+                                    <input type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();' value='Click to test'>
+                                </div>
+                                <div id='file_upload_message_div'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="button primary upload-button right" style="margin-top: 10px" onclick="$('#feature_selection_dialog').foundation('reveal', 'close');">
+                        <i class="fa fa-check"></i>
+                    Done</a>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label>
+                            <a href="#" class="button primary upload-button" data-reveal-id="feature_selection_dialog">
+                                <i class="fa fa-crosshairs"></i>
+                            Select features to extract</a>
+                        </label>
+                    </div>
+                </div>
+            <table id='featurize_data_table'>
     <tr>
         <td align='left'>
             <label>Feature selection<span class='small'>Select which features to extract from your data (default = all available features)</span></label>
@@ -327,8 +394,12 @@
 </tr>
 
 </table>
-</form>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
 <!-- Build model tab -->
 <div id='buildModelTab' align='center'>
 <form id='buildModelForm' action="/buildModel" enctype="multipart/form-data" method="post">

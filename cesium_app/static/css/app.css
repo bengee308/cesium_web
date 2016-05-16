@@ -198,3 +198,7 @@ input[type=file]{
 .header-label{
     text-align: left;
 }
+label[for="is_test"]{
+    margin-top: 5px;
+    margin-right: 50px;
+}
