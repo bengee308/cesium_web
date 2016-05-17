@@ -328,31 +328,27 @@
                         </label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="medium-1 columns">
+                        <div class="switch small">
+                            <input id="email_user" type="checkbox" value="True" name="email_user" checked>
+                            <label for="email_user">
+                                <span class="switch-on">Yes</span>
+                                <span class="switch-off">No</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="medium-7 columns" style="font-size: 0.875rem; padding-top: 4px">
+                        Receive an email notification upon featurization completion?
+                    </div>
+                    <div class="medium-4 columns"></div>
+                </div>
+                <div class="row">
+                    <div class="text-center">
+                        <a href="#" class="button primary upload-button" id="featurize_button" name="featurize_button" onclick="featurizeFormSubmit();"> Generate features</a>
+                    </div>
+                </div>
             <table id='featurize_data_table'>
-    <tr>
-        <td align='left'>
-            <label>Feature selection<span class='small'>Select which features to extract from your data (default = all available features)</span></label>
-        </td>
-        <td align='left'>
-            
-            <div id='feature_selection_link_div'>
-                <a href="#" id="feature_selection_link">Click here to open feature selection dialog</a>
-            </div>
-            
-        </td>
-    </tr>
-    <tr>
-        <td align='left'>
-            <input type='checkbox' name='email_user' id='email_user' value="True"><label>Notification email<span class='small'>Check to receive an email notification upon featurization completion. </span></label>
-        </td>
-        <td>
-        </td>
-    </tr>
-    <tr>
-        <td colspan=3 align='center'>
-            <div align='center'><input type='button' id='featurize_button' name='featurize_button' value='Generate features' class='submit_button' onclick="featurizeFormSubmit();" ></div>
-        </td>
-    </tr>
     <tr>
         <td align='left'>
             <div onclick="uploadFeaturesFormDialog();" class='hover_bgcolor_div'>
