@@ -470,7 +470,7 @@ Plot features</a>
         ): </strong><input type="text" name="{{ model.name }}_{{ param.name }}" id="{{ model.name }}_{{ param.name }}" value="{{ param.default }}" size=6></input></td>
         {% if loop.index is divisibleby 3 %}
         </tr>
-        <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'></tr>
+        <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
         {% endif %}
     {% endfor %}
 {% endfor %}
@@ -485,6 +485,9 @@ Plot features</a>
         </div>
     </div>
 </form>
+</div>
+</div>
+</div>
 </div>
 <!-- Predict tab -->
 <div id='predictTab' align='center'>
