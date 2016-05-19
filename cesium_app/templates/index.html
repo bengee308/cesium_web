@@ -444,13 +444,6 @@ Plot features</a>
                             </div>
                             <div class="medium-4 columns"></div>
                         </div>
-                        <div class="row">
-                            <div class="large-12 columns">
-                                <label class="header-label">Model Name
-                                <div id="model_name_div"><input type='text' name='new_model_name' id='new_model_name' class="stylized_input" placeholder="Enter a name for your your new model"></div><div id='model_name_okay_div' name='model_name_okay_div'></div>
-                                </label>
-                            </div>
-                        </div>
 
 <table>
 {% for model in MODEL_DESCRIPTIONS %}
@@ -477,6 +470,13 @@ Plot features</a>
 </table>
     <div class="row">
         <div class="large-12 columns">
+            <label class="header-label">Model Name
+            <div id="model_name_div"><input type='text' name='new_model_name' id='new_model_name' class="stylized_input" placeholder="Enter a name for your your new model"></div><div id='model_name_okay_div' name='model_name_okay_div'></div>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
             <div class="text-center">
                 <a href="#" class="button primary upload-button" id="model_build_submit_button" onclick="buildModelFormSubmit();"><i class="fa fa-magic"></i>
                 Build model</a>
@@ -491,8 +491,52 @@ Plot features</a>
 </div>
 <!-- Predict tab -->
 <div id='predictTab' align='center'>
-<form id='predictForm' action="/PredictData" enctype="multipart/form-data" method="post">
-<table>
+    <div class="row">
+        <div class="large-12 columns">
+            <div class="panel">
+                <h4 class="form-heading">Predict</h4>
+                <form id='predictForm' action="/PredictData" enctype="multipart/form-data" method="post">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="header-label">Select project:
+                                <select id="prediction_project_name" name="prediction_project_name">
+                                    {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                        <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                    {% endfor %}  
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="header-label">Select model:
+                                    <select id="prediction_model_name_and_type" name="prediction_model_name_and_type">
+                                    </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label class="header-label">Select dataset:
+                                <select id="prediction_dataset_select" name="prediction_dataset_select">
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div class="text-center">
+                                <a href="#" class="button primary upload-button" id="predict_form_submit_button" onclick="predictFormSubmit();"><i class="fa fa-lightbulb-o"></i>
+                                Predict</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<!-- <table>
 <tr>
 <td align='left'>
     <label>Select project: </label>
@@ -533,7 +577,7 @@ Plot features</a>
 </td>
 </tr>
 </table>
-</form>
+</form> -->
 
 </div>
 
