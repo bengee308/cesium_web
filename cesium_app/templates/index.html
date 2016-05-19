@@ -452,60 +452,7 @@ Plot features</a>
                             </div>
                         </div>
 
-<!-- <tr>
-    <td align='left'>
-        <label>Model Name<span class='small'>Enter a name for your new model:</span></label>
-    </td>
-    <td>
-        <div style='border:1px solid #BBB;'><input type='text' name='new_model_name' id='new_model_name' class="stylized_input"></div><div id='model_name_okay_div' name='model_name_okay_div'></div>
-    </td>
-</tr> -->
 <table>
-<!-- <tr>
-    <td align='left'>
-        <label>Select project: </label>
-    </td>
-    <td align='left' colspan=2>
-        <select id="buildmodel_project_name_select" name="buildmodel_project_name_select">
-            
-            {% for PROJ_NAME in CURRENT_PROJECTS %}
-                <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
-            {% endfor %}
-            
-        </select>
-    </td>
-    
-</tr>
-<tr align='left'>
-    <td align='left'>
-        <label>Feature set name<span class='small'>Select a data set to build your new model with:</span></label>
-    </td>
-    <td align='left'>
-        <div>
-            <select id="modelbuild_featset_name_select" name="modelbuild_featset_name_select">
-            </select>
-        </div>
-    </td>
-</tr>
-<tr align='left'>
-    <td align='left'>
-        <label>Select model type</label>
-    </td>
-    <td>
-        <div>
-            <select id="model_type_select" name="model_type_select">
-                {% for model in MODEL_DESCRIPTIONS %}
-                    <option value="{{ model.name }}">{{ model.name }}</option>
-                {% endfor %}
-            </select>
-        </div>
-    </td>
-</tr> -->
-<!-- <tr align='left'>
-    <td align='left'>
-        <input type="checkbox" name="model_use_default_params_checkbox" id="model_use_default_params_checkbox" checked>Use default model parameters</input>
-    </td>
-</tr> -->
 {% for model in MODEL_DESCRIPTIONS %}
     <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
         <td colspan=3>Please see <a target="_blank" href="{{ model.url }}">{{ model.url }}</a> for parameter descriptions.</td>
@@ -523,27 +470,10 @@ Plot features</a>
         ): </strong><input type="text" name="{{ model.name }}_{{ param.name }}" id="{{ model.name }}_{{ param.name }}" value="{{ param.default }}" size=6></input></td>
         {% if loop.index is divisibleby 3 %}
         </tr>
-        <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'>
+        <tr class="model_params_tr model_params_tr_{{ model.name }}" style="display: none;" align='left'></tr>
         {% endif %}
     {% endfor %}
 {% endfor %}
-<!-- <tr>
-    <td align='left'>
-        <label>Model Name<span class='small'>Enter a name for your new model:</span></label>
-    </td>
-    <td>
-        <div style='border:1px solid #BBB;'><input type='text' name='new_model_name' id='new_model_name' class="stylized_input"></div><div id='model_name_okay_div' name='model_name_okay_div'></div>
-    </td>
-</tr> -->
-<!-- <TR><BR></TR> -->
-<!-- <tr>
-<td colspan=3 align='center'>
-    <div align='center'>
-        <input type='button' value='Build model' id='model_build_submit_button' class='submit_button' onclick="buildModelFormSubmit();">
-    </div>
-    <div id="model_build_okay_msg_div"></div>
-</td>
-</tr> -->
 </table>
     <div class="row">
         <div class="large-12 columns">
