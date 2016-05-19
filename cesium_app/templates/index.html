@@ -236,7 +236,7 @@
             <div class="row">
                 <div class="large-12 columns">
                     <label class="header-label">Select project
-                        <select id="featureset_project_name_select" name="upload_project_name_select">
+                        <select id="featureset_project_name_select" name="featureset_project_name_select">
                             {% for PROJ_NAME in CURRENT_PROJECTS %}
                                 <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
                             {% endfor %}
@@ -248,6 +248,7 @@
                 <div class="medium-12 columns">
                     <label class="header-label">Select dataset</label>
                         <select id="featureset_dataset_select" name="featureset_dataset_select">
+
                         </select>
                 </div>
             </div>
@@ -270,7 +271,7 @@
                     </div>
                 </div>
             </div>
-            <div id="feature_selection_dialog" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <div class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
                 <h3 id="modalTitle">Feature Selection</h3>
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 <div class="tabs">
@@ -322,7 +323,7 @@
                 <div class="row">
                     <div class="large-12 columns">
                         <label>
-                            <a href="#" class="button primary upload-button" data-reveal-id="feature_selection_dialog">
+                            <a href="#" class="button primary upload-button left" data-reveal-id="feature_selection_dialog">
                                 <i class="fa fa-crosshairs"></i>
                             Select features to extract</a>
                         </label>
@@ -331,7 +332,7 @@
                 <div class="row">
                     <div class="medium-1 columns">
                         <div class="switch small">
-                            <input id="email_user" type="checkbox" value="True" name="email_user" checked>
+                            <input id="email_user" type="checkbox" value="True" name="email_user">
                             <label for="email_user">
                                 <span class="switch-on">Yes</span>
                                 <span class="switch-off">No</span>
@@ -349,48 +350,43 @@
                     </div>
                 </div>
             <table id='featurize_data_table'>
-    <tr>
-        <td align='left'>
-            <div onclick="uploadFeaturesFormDialog();" class='hover_bgcolor_div'>
-                <i><h3>Upload Features:</h3></i><span class='small'>Click here to upload your pre-featurized data set</span>
-            </div>
-        </td>
-    </tr>
-</table>
-</form>
-<BR><BR>
-<form id='plotFeaturesForm' action="/plotFeatures" enctype="multipart/form-data" method="post">
-<table id='plot_features_form_table'>
-    <tr>
-        <td align='left'><BR><i><h3>Plot Features from Existing Feature Set:</h3></i>
-        </td>
-    </tr>
-    <tr>
-        <td align='left' colspan=2>
-            <div><label>Select project:</label>
-            <select id="plot_feats_project_name_select" name="plot_feats_project_name_select">
-                {% for PROJ_NAME in CURRENT_PROJECTS %}
-                    <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
-                {% endfor %}
-                
-            </select>
-        </div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <div><label>Select featureset: </label>
-        <select id="plot_features_featset_name_select" name="plot_features_featset_name_select">
-            
-        </select></div>
-    </td>
-    <td>
-        <div align='center'><input type='button' id='plot_features_button' name='plot_features_button' value='Plot features' class='submit_button' onclick="plotFeaturesFormSubmit();"></div>
-    </td>
-</tr>
-
-</table>
-                </form>
+                <tr>
+                    <td align='left'>
+                        <div onclick="uploadFeaturesFormDialog();" class='hover_bgcolor_div'>
+                            <i><h3>Upload Features:</h3></i><span class='small'>Click here to upload your pre-featurized data set</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <h4 class="left">Plot features from Existing Feature Set:</h4>
+            <form id='plotFeaturesForm' action="/plotFeatures" enctype="multipart/form-data" method="post">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label class="header-label">Select project:
+                            <select id="plot_feats_project_name_select" name="plot_feats_project_name_select">
+                                {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                    <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-9 columns">
+                        <label class="header-label">Select featureset:
+                            <select id="plot_features_featset_name_select" name="plot_features_featset_name_select">
+                            </select>
+                        </label>
+                    </div>
+                    <div class="large-3 columns">
+                         <div class="text-center">
+                            <a href="#" class="button primary upload-button" id="plot_features_button" name="plot_features_button" onclick="plotFeaturesFormSubmit();"><i class="fa fa-line-chart"></i>
+Plot features</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
             </div>
         </div>
     </div>
@@ -398,6 +394,11 @@
 
 <!-- Build model tab -->
 <div id='buildModelTab' align='center'>
+    <div class="row">
+        <div class="large-12 columns" style="margin-top: 30px">
+            <div class="panel">
+                <h4 class="form-heading">Featurize uploaded time series data</h4>
+
 <form id='buildModelForm' action="/buildModel" enctype="multipart/form-data" method="post">
 <table>
 <tr>
