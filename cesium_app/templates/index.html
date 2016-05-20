@@ -5,35 +5,49 @@
 {% block content %}
     {% block tabs %}
         <div id='content'>
-            <div id='wrapper' style='text-align:center;'>
-<!--                 <nav class="tab-bar">
+            <div id='wrapper'>
+                <nav class="top-bar" data-topbar role="navigation">
                     <ul class="title-area">
-                        <a href="http://cesium.ml/blog/.."><img src="http://cesium.ml/blog/theme/img/cesium-blue-dark.png"
+                        <li class="name">
+                            <a href="http://cesium.ml/blog/.."><img src="http://cesium.ml/blog/theme/img/cesium-blue-dark.png"
                             style="height: 45px;
-                        padding: 7.5px;" class=""></a>Projects
+                            padding: 7.5px;" class="">Cesium ML</a>
+                        </li>
                     </ul>
-                </nav> -->
+                    <section class="top-bar-section">
+                        <!-- Right Nav Section -->
+                        <ul class="right">
+                          <li class="has-dropdown">
+                            <a href="#">Projects</a>
+                            <ul class="dropdown">
+                              <li style="z-index: 5"><a href="#">First link in dropdown</a></li>
+                              <li class="active" style="z-index: 5"><a href="#">Active link in dropdown</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                    </section>
+                </nav>
                 <section class="main-section">
-<!--                     <div id="tab-links">
-                        <div class="small-3 columns progress-bar-component active"><a href="#uploadTab" class="tab-title">Data</a></div>
-                        <div class="small-3 columns progress-bar-component light-gray"><a href="#featureTab" class="tab-title">Featurize</a>
-                        <div class="arrow-right blue"></div>
-                    </div>
-                    <div class="small-3 columns progress-bar-component dark-gray"><a href="#buildModelTab" class="tab-title">Build Model</a>
+            <div id="tab-links">
+                <div class="small-3 columns progress-bar-component active"><a href="#uploadTab" class="tab-title">Data</a></div>
+                <div class="small-3 columns progress-bar-component light-gray"><a href="#featurizeTab" class="tab-title">Featurize</a>
+                    <div class="arrow-right blue"></div>
+                </div>
+                <div class="small-3 columns progress-bar-component dark-gray"><a href="#buildModelTab" class="tab-title">Build Model</a>
                     <div class="arrow-right light-gray"></div>
                 </div>
-                <div class="small-3 columns progress-bar-component light-gray" data-tab="#tab3">Predict
+                <div class="small-3 columns progress-bar-component light-gray"><a href="#predictTab">Predict</a>
                     <div class="arrow-right dark-gray"></div>
                 </div>
-            </div> -->
-            <div id='tabs' style='width:900px; display:inline-block;' class='centered'>
-                <ul>
+            </div>
+            <div id='tabs'>
+<!--                 <ul>
                     <li><a href="#projectsTab" id="projectsTabButton" name="projectsTabButton">Projects</a></li>
                     <li><a href="#uploadTab" id="uploadTabButton" name="uploadTabButton">Data</a></li>
                     <li><a href="#featurizeTab" id="featurizeTabButton" name="featurizeTabButton">Featurize</a></li>
                     <li><a href="#buildModelTab" id="buildModelTabButton" name="buildModelTabButton">Build Model</a></li>
                     <li><a href="#predictTab" id="predictTabButton" name="predictTabButton">Predict</a></li>
-                </ul>
+                </ul> -->
                 <!-- Projects tab -->
                 <div id='projectsTab' align='center'>
                     <form id='newProjectForm' action='/newProject' enctype='multipart/form-data' method='post'>
@@ -750,7 +764,7 @@ $(document).ready(function(){
 
 
 var index = $('#tabs a[href="#buildModelTab"]').parent().index();
-$('#tabs').tabs( "option", "active", false);
+// $('#tabs').tabs( "option", "active", false);
 
 $("#results_header").html("<b>Model Creation for {{ model_name }}:</b>");
 

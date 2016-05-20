@@ -5,7 +5,7 @@ $(document).ready(function() {
         e.preventDefault();
         var currentAttrValue = $(this).attr('href');
         // Show/Hide Tabs
-        var allTabs = ['#uploadTab','#featureTab','#buildModelTab']
+        var allTabs = ['#uploadTab','#featurizeTab','#buildModelTab', '#predictTab']
         for (var i = 0; i < allTabs.length; i++){
             if (allTabs[i] === currentAttrValue){
                 $(allTabs[i]).show();

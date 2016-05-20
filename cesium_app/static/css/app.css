@@ -85,9 +85,9 @@ border-width: 15px;
     position: fixed;
     top: 45px;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
 }
-.tab-bar{
+.top-bar{
     position: fixed !important;
     width: 100%;
     z-index: 2!important;
