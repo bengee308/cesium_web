@@ -9,19 +9,30 @@
                 <nav class="top-bar" data-topbar role="navigation">
                     <ul class="title-area">
                         <li class="name">
-                            <a href="http://cesium.ml/blog/.."><img src="http://cesium.ml/blog/theme/img/cesium-blue-dark.png"
+                            <a href="http://cesium.ml/blog/.." class="tab-title"><img src="http://cesium.ml/blog/theme/img/cesium-blue-dark.png"
                             style="height: 45px;
                             padding: 7.5px;" class="">Cesium ML</a>
                         </li>
                     </ul>
+                    <section class="center">
+                        <ul class="text-center title-area">
+                            <li><h3>garrett</h3></li>
+                        </ul>
+                    </section>
                     <section class="top-bar-section">
                         <!-- Right Nav Section -->
+                        
                         <ul class="right">
-                          <li class="has-dropdown">
+                            <li class="divider"></li>
+                            <li class="has-dropdown not-click">
                             <a href="#">Projects</a>
                             <ul class="dropdown">
-                              <li style="z-index: 5"><a href="#">First link in dropdown</a></li>
-                              <li class="active" style="z-index: 5"><a href="#">Active link in dropdown</a></li>
+                                {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                    <li class="active"><a href="#">{{ PROJ_NAME }}</a></li>
+                                {% endfor %}
+                                <li class="text-left"><a href="#">Manage existing projects</a></li>
+                                <li class="text-left"><a href="#"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Create new project</a></li>
+                                <!-- <li class="active" style="z-index: 5"><a href="#">Active link in dropdown</a></li> -->
                             </ul>
                           </li>
                         </ul>
@@ -36,7 +47,7 @@
                 <div class="small-3 columns progress-bar-component dark-gray"><a href="#buildModelTab" class="tab-title">Build Model</a>
                     <div class="arrow-right light-gray"></div>
                 </div>
-                <div class="small-3 columns progress-bar-component light-gray"><a href="#predictTab">Predict</a>
+                <div class="small-3 columns progress-bar-component light-gray"><a href="#predictTab" class="tab-title">Predict</a>
                     <div class="arrow-right dark-gray"></div>
                 </div>
             </div>
@@ -285,7 +296,7 @@
                     </div>
                 </div>
             </div>
-            <div class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <div class="reveal-modal" id="feature_selection_dialog'"data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
                 <h3 id="modalTitle">Feature Selection</h3>
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 <div class="tabs">
@@ -753,7 +764,7 @@ $('#uploadcustomtab').html(customfeats_html_str);
 
 $('#feature_selection_dialog').parent().appendTo($("#featurizeForm"));
 
-$("#feature_selection_dialog_tabs").tabs();
+// $("#feature_selection_dialog_tabs").tabs();
 
 });
 {% if RESULTS %}

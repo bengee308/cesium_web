@@ -202,3 +202,14 @@ label[for="is_test"]{
     margin-top: 5px;
     margin-right: 50px;
 }
+.top-bar {
+    text-align: center;
+}
+.center {
+    display: inline-block;
+    color: white;
+}
+section.top-bar-section{
+    display: inline-block;
+    float: right;
+}

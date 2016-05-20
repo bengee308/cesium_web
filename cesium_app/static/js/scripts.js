@@ -1596,16 +1596,16 @@ function init_dialogs(){
             });
 
 
-    $("#feature_selection_dialog").bind("clickoutside", function(event){
-        $(this).dialog("close");
-    });
+    // $("#feature_selection_dialog").bind("clickoutside", function(event){
+        // $(this).dialog("close");
+    // });
 
 
-    $('#feature_selection_link').click(function() {
-        $feature_selection_dialog.dialog('open');
-        // prevent the default action, e.g., following a link
-        return false;
-    });
+    // $('#feature_selection_link').click(function() {
+    //     $feature_selection_dialog.dialog('open');
+    //     // prevent the default action, e.g., following a link
+    //     return false;
+    // });
 
 
     var $predict_metadata_format_dialog = $("<div id='predict_metadata_format_dialog' class='editDeleteResultsDialog'></div>")
