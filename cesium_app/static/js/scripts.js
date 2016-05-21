@@ -1573,7 +1573,7 @@ function init_dialogs(){
             });
 
     $('#features_link').click(function() {
-        $features_dialog.dialog('open');
+        // $features_dialog.dialog('open');
         // prevent the default action, e.g., following a link
         return false;
     });
@@ -1584,16 +1584,16 @@ function init_dialogs(){
     });
 
 
-    var $feature_selection_dialog = $('<div id="feature_selection_dialog" class="feature_selection_dialog" align="left"></div>')
-            .html("Using all features for now...")
-            .dialog({
-                height:500,
-                width:600,
-                autoOpen: false,
-                title: 'Feature Selection',
-                position: ['center', 20],
-                buttons: [{text:"Done",click:function(){$(this).dialog("close");}}]
-            });
+    // var $feature_selection_dialog = $('<div id="feature_selection_dialog" class="feature_selection_dialog" align="left"></div>')
+    //         .html("Using all features for now...")
+    //         .dialog({
+    //             height:500,
+    //             width:600,
+    //             autoOpen: false,
+    //             title: 'Feature Selection',
+    //             position: ['center', 20],
+    //             buttons: [{text:"Done",click:function(){$(this).dialog("close");}}]
+    //         });
 
 
     // $("#feature_selection_dialog").bind("clickoutside", function(event){

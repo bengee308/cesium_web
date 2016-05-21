@@ -189,7 +189,7 @@ input[type=file]{
         .tab.active {
             display:block;
         }
-#feature_selection_dialog{
+#feature_selection_dialog, #createProject{
   background-color: #eaeaea;
 }
 .form-heading{

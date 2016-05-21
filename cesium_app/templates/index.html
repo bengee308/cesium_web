@@ -31,7 +31,7 @@
                                     <li class="active"><a href="#">{{ PROJ_NAME }}</a></li>
                                 {% endfor %}
                                 <li class="text-left"><a href="#">Manage existing projects</a></li>
-                                <li class="text-left"><a href="#"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Create new project</a></li>
+                                <li class="text-left"><a href="#" data-reveal-id="createProject"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Create new project</a></li>
                                 <!-- <li class="active" style="z-index: 5"><a href="#">Active link in dropdown</a></li> -->
                             </ul>
                           </li>
@@ -51,6 +51,81 @@
                     <div class="arrow-right dark-gray"></div>
                 </div>
             </div>
+            <div id="createProject" class="reveal-modal" data-reveal aria-labelledby="createProjectTitle" aria-hidden="true" role="dialog">
+              <h3 id="createProjectTitle">Create a new project</h3>
+                    <form id='newProjectForm' action='/newProject' enctype='multipart/form-data' method='post'>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Project Title
+                                    <input type="text" placeholder="Enter a title for your new project" name='new_project_name' id='new_project_name'/><div id='new_proj_name_okay_div' name='new_proj_name_okay_div'></div>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large=12 columns">
+                                <label>Description/notes
+                                    <textarea id='project_description' name='project_description' placeholder="Enter a description of your new project" rows='3' cols='50'></textarea>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label>Additional Authorized Users
+                                <textarea id='addl_authed_users' name ='addl_authed_users' rows='3' cols='50' placeholder="Enter Google account usernames (separated by a comma) of those you wish to have access to this project"></textarea>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="text-center">
+                                <a id='new_project_button' href="#" class="button primary upload-button" onclick="$('#createProject').foundation('reveal', 'close'); newProjectFormSubmit();">
+                                <i class="fa fa-plus-square-o"></i>
+                                Create Project</a>
+                            </div>
+                        </div>
+<!--                         <table>
+                            <tr>
+                                <td align='left'>
+                                    <label>Project Title<span class='small'>Enter a title for your new project</span></label>
+                                </td>
+                                
+                                <td align='left'>
+                                    <div style='border:1px solid #BBB;'><input type='text' name='new_project_name' id='new_project_name' class="stylized_input" size='50'></div><div id='new_proj_name_okay_div' name='new_proj_name_okay_div'></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align='left'>
+                                    <label>Description/notes<span class='small'></span></label>
+                                </td>
+                                <td>
+                                    <textarea id='project_description' name='project_description' rows='3' cols='50'></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align='left'>
+                                    <label>Additional Authorized Users<span class='small'>Enter Google account usernames <br>(separated by a comma) of <br>those you wish to have access to this project</span></label>
+                                </td>
+                                <td>
+                                    <textarea id='addl_authed_users' name ='addl_authed_users' rows='3' cols='50'></textarea>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <input type='button' id='new_project_button' class='submit_button' value='Create project' onclick='newProjectFormSubmit();'>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <br>
+                                </td>
+                            </tr>
+                        </table> -->
+                    </form>
+              <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+            </div>
             <div id='tabs'>
 <!--                 <ul>
                     <li><a href="#projectsTab" id="projectsTabButton" name="projectsTabButton">Projects</a></li>
@@ -61,7 +136,7 @@
                 </ul> -->
                 <!-- Projects tab -->
                 <div id='projectsTab' align='center'>
-                    <form id='newProjectForm' action='/newProject' enctype='multipart/form-data' method='post'>
+<!--                     <form id='newProjectForm' action='/newProject' enctype='multipart/form-data' method='post'>
                         <table>
                             <tr>
                                 <td align='left'>
@@ -108,7 +183,7 @@
                                 </td>
                             </tr>
                         </table>
-                    </form>
+                    </form> -->
                     <form id='editOrDeleteProjectForm' action='/editOrDeleteProject' enctype='multipart/form-data' method='post'>
                         <table>
                             <tr>
@@ -296,7 +371,7 @@
                     </div>
                 </div>
             </div>
-            <div class="reveal-modal" id="feature_selection_dialog'"data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+            <div class="reveal-modal" id="feature_selection_dialog" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
                 <h3 id="modalTitle">Feature Selection</h3>
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 <div class="tabs">
@@ -741,7 +816,7 @@ var feature_selection_html_str = "<div id='feature_selection_dialog_tabs'> \
 <div id='uploadcustomtab'> \
 </div> \
 </div> ";
-$('#feature_selection_dialog').html(feature_selection_html_str);
+// $('#feature_selection_dialog').html(feature_selection_html_str);
 var featureset1_html_str = "<a href='#' onclick='select_deselect_all_feats1();'>Click here to select/deselect all</a><br><br>";
 {% for FEAT in FEATURES_AVAILABLE[0] %}
 featureset1_html_str += "<input type='checkbox' class='feat1_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>{{ FEAT }}<br>"
@@ -762,7 +837,7 @@ var customfeats_html_str = "Select .py file containing your custom feature defin
 $('#uploadcustomtab').html(customfeats_html_str);
 
 
-$('#feature_selection_dialog').parent().appendTo($("#featurizeForm"));
+// $('#feature_selection_dialog').parent().appendTo($("#featurizeForm"));
 
 // $("#feature_selection_dialog_tabs").tabs();
 
