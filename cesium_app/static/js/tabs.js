@@ -1,6 +1,8 @@
 $(document).ready(function() {
     Foundation.global.namespace = '';
     $(document).foundation();
+    var currProj = "";
+    var selectArr = ["upload_project_name_select", "transform_data_project_name_select", "featureset_project_name_select", "plot_feats_project_name_select", "buildmodel_project_name_select","prediction_project_name"]
     $('#tab-links a').on('click', function(e)  {
         e.preventDefault();
         var currentAttrValue = $(this).attr('href');
@@ -73,6 +75,20 @@ $(document).ready(function() {
         var proj = el.attr("data-proj");
         $("#PROJECT_NAME_TO_EDIT").val(proj);
         $("#action").val(action);
-        editOrDeleteProjectFormSubmit()
+        editOrDeleteProjectFormSubmit();
+    }
+    $(".selectProj").click(function(e){
+        e.preventDefault();
+        var proj = $(this).attr("data-proj");
+        $("#projTitle").html(proj);
+        currProj = proj;
+        $(".main-section").show();
+        //change vals for all selects to current proj
+        changeVal();
+    })
+    function changeVal(){
+        for (var i = 0; i < selectArr.length; i++){
+            $("#" + selectArr[i]).val(currProj);
+        }
     }
 });

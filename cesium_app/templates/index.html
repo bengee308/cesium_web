@@ -16,7 +16,7 @@
                     </ul>
                     <section class="center">
                         <ul class="text-center title-area">
-                            <li><h3>garrett</h3></li>
+                            <li><h4 id="projTitle"></h4></li>
                         </ul>
                     </section>
                     <section class="top-bar-section">
@@ -41,11 +41,11 @@
                 <div class="row">
                     <div class="small-6 columns">
                         <div id="manageProjects" class="text-center">
-                        <h3>Manage Projects</h3>
+                        <h3>Manage an existing project:</h3>
                             <table id="manageProjTable">
                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
                                     <tr class="proj">
-                                        <td><a href="#">{{ PROJ_NAME }}</a></td>
+                                        <td><a href="#" class="selectProj" data-proj="{{ PROJ_NAME }}">{{ PROJ_NAME }}</a></td>
                                         <td><a href="#" class="editProj" data-proj="{{ PROJ_NAME }}">Edit</a></td>
                                         <td><a href="#" class="deleteProj" data-proj="{{ PROJ_NAME }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
                                     </tr>
@@ -250,7 +250,7 @@
                                 <label class="header-label">Select project:
                                     <select id="upload_project_name_select" name="upload_project_name_select">
                                         {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                            <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                            <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
                                         {% endfor %}
                                     </select>
                                 </label>   
@@ -308,7 +308,7 @@
                                         <label class="header-label">Select Project
                                             <select id="transform_data_project_name_select" name="transform_data_project_name_select">
                                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                                    <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                                    <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
                                                 {% endfor %}
                                             </select>
                                         </label>
@@ -356,7 +356,7 @@
                     <label class="header-label">Select project
                         <select id="featureset_project_name_select" name="featureset_project_name_select">
                             {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
                             {% endfor %}
                         </select>
                     </label>
@@ -484,7 +484,7 @@
                         <label class="header-label">Select project:
                             <select id="plot_feats_project_name_select" name="plot_feats_project_name_select">
                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                    <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                    <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
                                 {% endfor %}
                             </select>
                         </label>
@@ -619,7 +619,7 @@ Plot features</a>
                             <label class="header-label">Select project:
                                 <select id="prediction_project_name" name="prediction_project_name">
                                     {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                        <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
+                                        <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
                                     {% endfor %}  
                                 </select>
                             </label>

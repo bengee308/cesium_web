@@ -217,7 +217,11 @@ section.top-bar-section{
     display: none;
 }
 /* Manage Projects Table */
+/* TODO: get rid of this style, make some global thing for all tabs*/
 #manageProjects{
     position: absolute;
     top: 50px;
+}
+#projTitle{
+    color: white;
 }
