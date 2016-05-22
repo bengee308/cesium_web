@@ -61,4 +61,18 @@ $(document).ready(function() {
         e.preventDefault();
       $('#feature_selection_dialog').foundation('reveal', 'close');
     });
+    $(".editProj").click(function(e){
+        e.preventDefault();
+        modifyProj($(this), "Edit");
+    });
+    $(".deleteProj").click(function(e){
+        e.preventDefault();
+        modifyProj($(this), "Delete")
+    });
+    function modifyProj(el, action){
+        var proj = el.attr("data-proj");
+        $("#PROJECT_NAME_TO_EDIT").val(proj);
+        $("#action").val(action);
+        editOrDeleteProjectFormSubmit()
+    }
 });

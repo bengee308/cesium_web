@@ -213,3 +213,11 @@ section.top-bar-section{
     display: inline-block;
     float: right;
 }
+.main-section{
+    display: none;
+}
+/* Manage Projects Table */
+#manageProjects{
+    position: absolute;
+    top: 50px;
+}

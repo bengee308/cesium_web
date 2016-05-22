@@ -38,7 +38,60 @@
                         </ul>
                     </section>
                 </nav>
-                <section class="main-section">
+                <div class="row">
+                    <div class="small-6 columns">
+                        <div id="manageProjects" class="text-center">
+                        <h3>Manage Projects</h3>
+                            <table id="manageProjTable">
+                                {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                    <tr class="proj">
+                                        <td><a href="#">{{ PROJ_NAME }}</a></td>
+                                        <td><a href="#" class="editProj" data-proj="{{ PROJ_NAME }}">Edit</a></td>
+                                        <td><a href="#" class="deleteProj" data-proj="{{ PROJ_NAME }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                    <div class="small-6 columns">
+                        <form id='editOrDeleteProjectForm' action='/editOrDeleteProject' enctype='multipart/form-data' method='post'>
+                            <table>
+                                <tr>
+                                    <td align='left'>
+                                        <i><h3>Manage an existing project:</h3></i>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align='left' colspan=2>
+                                        <div><label>Select project:</label>
+                                        <select id="PROJECT_NAME_TO_EDIT" name="PROJECT_NAME_TO_EDIT">
+                                            {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                                <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
+                                            {% endfor %}
+                                            
+                                        </select>
+                                    </div>
+                                </td>
+                                <td align='right'>
+                                    <div>
+                                        <label>Action:</label>
+                                        <select id='action' name='action'>
+                                            <option value='Edit'>Edit</option>
+                                            <option value='Delete'>Delete</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan=3 align='right'>
+                                    <input type="button" value="Submit" name="editOrDeleteSubmit" id="editOrDeleteSubmit" onclick="editOrDeleteProjectFormSubmit()">
+                                </td>
+                            </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+        <section class="main-section">
             <div id="tab-links">
                 <div class="small-3 columns progress-bar-component active"><a href="#uploadTab" class="tab-title">Data</a></div>
                 <div class="small-3 columns progress-bar-component light-gray"><a href="#featurizeTab" class="tab-title">Featurize</a>
@@ -184,41 +237,6 @@
                             </tr>
                         </table>
                     </form> -->
-                    <form id='editOrDeleteProjectForm' action='/editOrDeleteProject' enctype='multipart/form-data' method='post'>
-                        <table>
-                            <tr>
-                                <td align='left'>
-                                    <i><h3>Manage an existing project:</h3></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align='left' colspan=2>
-                                    <div><label>Select project:</label>
-                                    <select id="PROJECT_NAME_TO_EDIT" name="PROJECT_NAME_TO_EDIT">
-                                        {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                            <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
-                                        {% endfor %}
-                                        
-                                    </select>
-                                </div>
-                            </td>
-                            <td align='right'>
-                                <div>
-                                    <label>Action:</label>
-                                    <select id='action' name='action'>
-                                        <option value='Edit'>Edit</option>
-                                        <option value='Delete'>Delete</option>
-                                    </select>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan=3 align='right'>
-                                <input type="button" value="Submit" name="editOrDeleteSubmit" id="editOrDeleteSubmit" onclick="editOrDeleteProjectFormSubmit()">
-                            </td>
-                        </tr>
-                    </table>
-                </form>
             </div>
         <!-- Upload data tab -->
         <div id='uploadTab'>
