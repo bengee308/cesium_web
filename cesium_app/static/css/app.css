@@ -25,57 +25,31 @@
 	height: 0;
 	border-top: 27px solid transparent;
 	border-bottom: 27px solid transparent;
+    border-left: 27px solid black;
     position: absolute;
     left: 0px;
     top: 0px;
     z-index: 2;
 }
-.arrow-right.blue{
-    border-left: 27px solid #008cba;
+.arrow-right:after{
+    content:'';
+    width: 0; 
+    height: 0; 
+    border-top: 26px solid transparent;
+    border-bottom: 26px solid transparent;
+    /*border-left: 26px solid #dddddd;  */
+    position:absolute;
+    top:-26px;
+    right:1px;
 }
-.arrow-right.light-gray{
-    border-left: 27px solid #cec8c8;
+.arrow-right.blue:after{
+    border-left: 26px solid #008cba;
 }
-.arrow-right.dark-gray{
-    border-left: 27px solid #b7aaaa;
+.arrow-right.light-gray:after{
+    border-left: 26px solid #cec8c8;
 }
-.tri-down {
-
-    /* Styling block element, not required */
-    position: relative;
-    margin-bottom: 2em;
-    padding: 1em;
-    border-bottom: 1px solid #999;
-    background: #f3f3f3;
-}
-
-/* Required for Down Triangle */
-.tri-down:before, .tri-down:after {
-content: "";
-position: absolute;
-width: 0;
-height: 0;
-border-style: solid;
-border-color: transparent;
-border-right: 0;
-}
-
-/* Stroke */
-.tri-down:before {
-bottom: -16px;
-left: 21px;
-
-/* If 1px darken stroke slightly */
-border-left-color: #777;
-border-width: 16px;
-}
-
-/* Fill */
-.tri-down:after {
-bottom: -15px;
-left: 22px;
-border-top-color: #f3f3f3;
-border-width: 15px;
+.arrow-right.dark-gray:after{
+    border-left: 26px solid #b7aaaa;
 }
 .upload-button{
     padding: 10px !important;
@@ -213,15 +187,25 @@ section.top-bar-section{
     display: inline-block;
     float: right;
 }
-.main-section{
-    display: none;
-}
 /* Manage Projects Table */
 /* TODO: get rid of this style, make some global thing for all tabs*/
 #manageProjects{
-    position: absolute;
-    top: 50px;
+    position: relative;
+    top: 60px;
 }
 #projTitle{
     color: white;
+}
+.projNameSelect{
+    display: none;
+}
+.hidden{
+    display: none;
+}
+.hiddenForm{
+    display: none;
+}
+#tabs{
+    position: relative;
+    top: 120px;
 }

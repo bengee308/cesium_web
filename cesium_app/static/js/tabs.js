@@ -6,6 +6,7 @@ $(document).ready(function() {
     $('#tab-links a').on('click', function(e)  {
         e.preventDefault();
         var currentAttrValue = $(this).attr('href');
+        window.location.hash = "panel-" + currentAttrValue.replace('#', '');
         // Show/Hide Tabs
         var allTabs = ['#uploadTab','#featurizeTab','#buildModelTab', '#predictTab']
         for (var i = 0; i < allTabs.length; i++){
@@ -42,10 +43,8 @@ $(document).ready(function() {
     	e.preventDefault();
     	var fileTarget = $(this).attr("data-target");
     	$("#"+ fileTarget).click();
-    	console.log($("#"+ fileTarget).val());
     });
     $("#headerfile, #zipfile, #custom_feat_script_file").change(function(){
-        console.log("changed");
     	var path = $(this).val();
     	var filename = path.replace(/^.*\\/, "");
     	var span = $(this).attr("data-selected");
@@ -77,14 +76,24 @@ $(document).ready(function() {
         $("#action").val(action);
         editOrDeleteProjectFormSubmit();
     }
-    $(".selectProj").click(function(e){
+    $(".selectProj, .projDropdown").click(function(e){
         e.preventDefault();
         var proj = $(this).attr("data-proj");
         $("#projTitle").html(proj);
         currProj = proj;
-        $(".main-section").show();
+        $("#manageProjects").hide()
+        $("#tabs").show();
+        $("#uploadTab").show();
+        $("#tab-links").show();
         //change vals for all selects to current proj
         changeVal();
+    });
+    $("#manageProjectsLink").click(function(e){
+        e.preventDefault();
+        $("#tabs").hide();
+        $("#tab-links").hide();
+        $("#manageProjects").show()
+        
     })
     function changeVal(){
         for (var i = 0; i < selectArr.length; i++){

@@ -28,9 +28,9 @@
                             <a href="#">Projects</a>
                             <ul class="dropdown">
                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                    <li class="active"><a href="#">{{ PROJ_NAME }}</a></li>
+                                    <li class="active projDropdown" data-proj="{{ PROJ_NAME }}"><a href="#">{{ PROJ_NAME }}</a></li>
                                 {% endfor %}
-                                <li class="text-left"><a href="#">Manage existing projects</a></li>
+                                <li class="text-left"><a href="#" id="manageProjectsLink"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Manage existing projects</a></li>
                                 <li class="text-left"><a href="#" data-reveal-id="createProject"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Create new project</a></li>
                                 <!-- <li class="active" style="z-index: 5"><a href="#">Active link in dropdown</a></li> -->
                             </ul>
@@ -38,70 +38,17 @@
                         </ul>
                     </section>
                 </nav>
-                <div class="row">
-                    <div class="small-6 columns">
-                        <div id="manageProjects" class="text-center">
-                        <h3>Manage an existing project:</h3>
-                            <table id="manageProjTable">
-                                {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                    <tr class="proj">
-                                        <td><a href="#" class="selectProj" data-proj="{{ PROJ_NAME }}">{{ PROJ_NAME }}</a></td>
-                                        <td><a href="#" class="editProj" data-proj="{{ PROJ_NAME }}">Edit</a></td>
-                                        <td><a href="#" class="deleteProj" data-proj="{{ PROJ_NAME }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </div>
-                    </div>
-                    <div class="small-6 columns">
-                        <form id='editOrDeleteProjectForm' action='/editOrDeleteProject' enctype='multipart/form-data' method='post'>
-                            <table>
-                                <tr>
-                                    <td align='left'>
-                                        <i><h3>Manage an existing project:</h3></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align='left' colspan=2>
-                                        <div><label>Select project:</label>
-                                        <select id="PROJECT_NAME_TO_EDIT" name="PROJECT_NAME_TO_EDIT">
-                                            {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                                <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
-                                            {% endfor %}
-                                            
-                                        </select>
-                                    </div>
-                                </td>
-                                <td align='right'>
-                                    <div>
-                                        <label>Action:</label>
-                                        <select id='action' name='action'>
-                                            <option value='Edit'>Edit</option>
-                                            <option value='Delete'>Delete</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan=3 align='right'>
-                                    <input type="button" value="Submit" name="editOrDeleteSubmit" id="editOrDeleteSubmit" onclick="editOrDeleteProjectFormSubmit()">
-                                </td>
-                            </tr>
-                            </table>
-                        </form>
-                    </div>
-                </div>
         <section class="main-section">
-            <div id="tab-links">
+            <div id="tab-links" class="hidden">
                 <div class="small-3 columns progress-bar-component active"><a href="#uploadTab" class="tab-title">Data</a></div>
                 <div class="small-3 columns progress-bar-component light-gray"><a href="#featurizeTab" class="tab-title">Featurize</a>
                     <div class="arrow-right blue"></div>
                 </div>
-                <div class="small-3 columns progress-bar-component dark-gray"><a href="#buildModelTab" class="tab-title">Build Model</a>
+                <div class="small-3 columns progress-bar-component light-gray"><a href="#buildModelTab" class="tab-title">Build Model</a>
                     <div class="arrow-right light-gray"></div>
                 </div>
                 <div class="small-3 columns progress-bar-component light-gray"><a href="#predictTab" class="tab-title">Predict</a>
-                    <div class="arrow-right dark-gray"></div>
+                    <div class="arrow-right light-gray"></div>
                 </div>
             </div>
             <div id="createProject" class="reveal-modal" data-reveal aria-labelledby="createProjectTitle" aria-hidden="true" role="dialog">
@@ -135,51 +82,10 @@
                                 Create Project</a>
                             </div>
                         </div>
-<!--                         <table>
-                            <tr>
-                                <td align='left'>
-                                    <label>Project Title<span class='small'>Enter a title for your new project</span></label>
-                                </td>
-                                
-                                <td align='left'>
-                                    <div style='border:1px solid #BBB;'><input type='text' name='new_project_name' id='new_project_name' class="stylized_input" size='50'></div><div id='new_proj_name_okay_div' name='new_proj_name_okay_div'></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align='left'>
-                                    <label>Description/notes<span class='small'></span></label>
-                                </td>
-                                <td>
-                                    <textarea id='project_description' name='project_description' rows='3' cols='50'></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align='left'>
-                                    <label>Additional Authorized Users<span class='small'>Enter Google account usernames <br>(separated by a comma) of <br>those you wish to have access to this project</span></label>
-                                </td>
-                                <td>
-                                    <textarea id='addl_authed_users' name ='addl_authed_users' rows='3' cols='50'></textarea>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                </td>
-                                <td>
-                                    <input type='button' id='new_project_button' class='submit_button' value='Create project' onclick='newProjectFormSubmit();'>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <br>
-                                </td>
-                            </tr>
-                        </table> -->
                     </form>
               <a class="close-reveal-modal" aria-label="Close">&#215;</a>
             </div>
-            <div id='tabs'>
+        
 <!--                 <ul>
                     <li><a href="#projectsTab" id="projectsTabButton" name="projectsTabButton">Projects</a></li>
                     <li><a href="#uploadTab" id="uploadTabButton" name="uploadTabButton">Data</a></li>
@@ -187,59 +93,65 @@
                     <li><a href="#buildModelTab" id="buildModelTabButton" name="buildModelTabButton">Build Model</a></li>
                     <li><a href="#predictTab" id="predictTabButton" name="predictTabButton">Predict</a></li>
                 </ul> -->
-                <!-- Projects tab -->
-                <div id='projectsTab' align='center'>
-<!--                     <form id='newProjectForm' action='/newProject' enctype='multipart/form-data' method='post'>
+    <!-- Projects tab -->
+        <div id='projectsTab' align='center'>
+        </div>
+        <div id="manageProjects">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="panel">
+                    <h4>Manage an existing project:</h4>
+                    <h6>Select a project below or create a new project to begin</h6>
+                            <table id="manageProjTable">
+                                {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                    <tr class="proj">
+                                        <td><a href="#" class="selectProj" data-proj="{{ PROJ_NAME }}">{{ PROJ_NAME }}</a></td>
+                                        <td><a href="#" class="editProj" data-proj="{{ PROJ_NAME }}">Edit</a></td>
+                                        <td><a href="#" class="deleteProj" data-proj="{{ PROJ_NAME }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                    </div>
+                </div>
+                    <form id='editOrDeleteProjectForm' action='/editOrDeleteProject' enctype='multipart/form-data' method='post' class="hiddenForm">
                         <table>
                             <tr>
                                 <td align='left'>
-                                    <i><h3>Create a new project:</h3></i>
+                                    <i><h3>Manage an existing project:</h3></i>
                                 </td>
                             </tr>
                             <tr>
-                                <td align='left'>
-                                    <label>Project Title<span class='small'>Enter a title for your new project</span></label>
+                                <td align='left' colspan=2>
+                                    <div><label>Select project:</label>
+                                        <select id="PROJECT_NAME_TO_EDIT" name="PROJECT_NAME_TO_EDIT">
+                                            {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                                <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
                                 </td>
-                                
-                                <td align='left'>
-                                    <div style='border:1px solid #BBB;'><input type='text' name='new_project_name' id='new_project_name' class="stylized_input" size='50'></div><div id='new_proj_name_okay_div' name='new_proj_name_okay_div'></div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align='left'>
-                                    <label>Description/notes<span class='small'></span></label>
-                                </td>
-                                <td>
-                                    <textarea id='project_description' name='project_description' rows='3' cols='50'></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align='left'>
-                                    <label>Additional Authorized Users<span class='small'>Enter Google account usernames <br>(separated by a comma) of <br>those you wish to have access to this project</span></label>
-                                </td>
-                                <td>
-                                    <textarea id='addl_authed_users' name ='addl_authed_users' rows='3' cols='50'></textarea>
-                                </td>
-                                <td>
+                                <td align='right'>
+                                    <div>
+                                        <label>Action:</label>
+                                        <select id='action' name='action'>
+                                            <option value='Edit'>Edit</option>
+                                            <option value='Delete'>Delete</option>
+                                        </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
-                                </td>
-                                <td>
-                                    <input type='button' id='new_project_button' class='submit_button' value='Create project' onclick='newProjectFormSubmit();'>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <br>
+                                <td colspan=3 align='right'>
+                                    <input type="button" value="Submit" name="editOrDeleteSubmit" id="editOrDeleteSubmit" onclick="editOrDeleteProjectFormSubmit()">
                                 </td>
                             </tr>
                         </table>
-                    </form> -->
+                    </form>
             </div>
+        </div>
         <!-- Upload data tab -->
-        <div id='uploadTab'>
+    <div id='tabs'>
+        <div id='uploadTab' class="hidden">
         <div class="row">
             <div class="large-12 columns">
                 <div class="panel">
@@ -247,7 +159,7 @@
                     <form id='uploadForm' action="/uploadData" enctype="multipart/form-data" method="post">
                         <div class="row">
                             <div class="large-12 columns">
-                                <label class="header-label">Select project:
+                                <label class="header-label projNameSelect">Select project:
                                     <select id="upload_project_name_select" name="upload_project_name_select">
                                         {% for PROJ_NAME in CURRENT_PROJECTS %}
                                             <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
@@ -305,7 +217,7 @@
                             <form id='transformDataForm' action="/transformData" enctype="multipart/form-data" method="post">
                                 <div class="row">
                                     <div class="large-12 columns">
-                                        <label class="header-label">Select Project
+                                        <label class="header-label projNameSelect">Select Project
                                             <select id="transform_data_project_name_select" name="transform_data_project_name_select">
                                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
                                                     <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
@@ -345,7 +257,7 @@
         </div>
     </div>
     <!-- Features tab -->
-    <div id='featurizeTab'>
+    <div id='featurizeTab' class="hidden">
         <div class="row">
         <div class="large-12 columns" style="margin-top: 30px">
             <div class="panel">
@@ -353,7 +265,7 @@
         <form id='featurizeForm' action="/FeaturizeData" enctype="multipart/form-data" method="post">
             <div class="row">
                 <div class="large-12 columns">
-                    <label class="header-label">Select project
+                    <label class="header-label projNameSelect">Select project
                         <select id="featureset_project_name_select" name="featureset_project_name_select">
                             {% for PROJ_NAME in CURRENT_PROJECTS %}
                                 <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
@@ -481,7 +393,7 @@
             <form id='plotFeaturesForm' action="/plotFeatures" enctype="multipart/form-data" method="post">
                 <div class="row">
                     <div class="large-12 columns">
-                        <label class="header-label">Select project:
+                        <label class="header-label projNameSelect">Select project:
                             <select id="plot_feats_project_name_select" name="plot_feats_project_name_select">
                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
                                     <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
@@ -511,7 +423,7 @@ Plot features</a>
 </div>
 
 <!-- Build model tab -->
-<div id='buildModelTab' align='center'>
+<div id='buildModelTab' class="hidden">
     <div class="row">
         <div class="large-12 columns" style="margin-top: 30px">
             <div class="panel">
@@ -519,7 +431,7 @@ Plot features</a>
                     <form id='buildModelForm' action="/buildModel" enctype="multipart/form-data" method="post">
                         <div class="row">
                             <div class="large-12 columns">
-                                <label class="header-label">Select project:
+                                <label class="header-label projNameSelect">Select project:
                                     <select id="buildmodel_project_name_select" name="buildmodel_project_name_select">
                                         {% for PROJ_NAME in CURRENT_PROJECTS %}
                                             <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
@@ -608,7 +520,7 @@ Plot features</a>
 </div>
 </div>
 <!-- Predict tab -->
-<div id='predictTab' align='center'>
+<div id='predictTab' class="hidden">
     <div class="row">
         <div class="large-12 columns">
             <div class="panel">
@@ -616,7 +528,7 @@ Plot features</a>
                 <form id='predictForm' action="/PredictData" enctype="multipart/form-data" method="post">
                     <div class="row">
                         <div class="large-12 columns">
-                            <label class="header-label">Select project:
+                            <label class="header-label projNameSelect">Select project:
                                 <select id="prediction_project_name" name="prediction_project_name">
                                     {% for PROJ_NAME in CURRENT_PROJECTS %}
                                         <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
