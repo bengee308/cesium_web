@@ -3,41 +3,25 @@ $(document).ready(function() {
     $(document).foundation();
     var currProj = "";
     var selectArr = ["upload_project_name_select", "transform_data_project_name_select", "featureset_project_name_select", "plot_feats_project_name_select", "buildmodel_project_name_select","prediction_project_name"]
+    var mainTabs = ['#uploadTab','#featurizeTab','#buildModelTab', '#predictTab'];
+    var featsetTabs = ['#featureset1tab','#featureset2tab','#uploadcustomtab'];
     $('#tab-links a').on('click', function(e)  {
         e.preventDefault();
         var currentAttrValue = $(this).attr('href');
-        window.location.hash = "panel-" + currentAttrValue.replace('#', '');
+        // window.location.hash = "panel-" + currentAttrValue.replace('#', '');
         // Show/Hide Tabs
-        var allTabs = ['#uploadTab','#featurizeTab','#buildModelTab', '#predictTab']
-        for (var i = 0; i < allTabs.length; i++){
-            if (allTabs[i] === currentAttrValue){
-                $(allTabs[i]).show();
-            }
-            else{
-                $(allTabs[i]).hide();   
-            }
-        }
+        changeTab(currentAttrValue, mainTabs);
         // Change/remove current tab to active
         // $(this).parent('li').addClass('active').siblings().removeClass('active');
     });
     
     $('#feature-tab-links a').on('click', function(e)  {
         e.preventDefault();
-        var currentAttrValue = $(this).attr('href');
-        
+        var currentAttrValue = $(this).attr('href');        
         // Show/Hide Tabs
-        var allTabs = ['#featureset1tab','#featureset2tab','#uploadcustomtab']
-        for (var i = 0; i < allTabs.length; i++){
-
-            if (allTabs[i] === currentAttrValue){
-                $(allTabs[i]).show();
-            }
-            else{
-                $(allTabs[i]).hide();   
-            }
-        }
+        changeTab(currentAttrValue, featsetTabs);
         // Change/remove current tab to active
-        $(this).parent('li').addClass('active').siblings().removeClass('active');
+        // $(this).parent('li').addClass('active').siblings().removeClass('active');
     });
     $("#header_file_upload, #tarball_file_upload").click(function(e){
     	e.preventDefault();
@@ -50,14 +34,6 @@ $(document).ready(function() {
     	var span = $(this).attr("data-selected");
     	$(span).text('   '+filename);
     });
-    // $('#feature_selection_dialog').foundation();
-    // $('#feature_modal_open').on('click', function() {
-    //         // var popup = new Foundation.Reveal($('#feature_selection_dialog'));
-    //         // popup.open();
-    //         console.log("hello");
-    //     $('#feature_selection_dialog').reveal();
-    // });
-    // $(document).foundation();
     $('a.custom-close-reveal-modal').click(function(e){
         e.preventDefault();
       $('#feature_selection_dialog').foundation('reveal', 'close');
@@ -81,23 +57,45 @@ $(document).ready(function() {
         var proj = $(this).attr("data-proj");
         $("#projTitle").html(proj);
         currProj = proj;
-        $("#manageProjects").hide()
-        $("#tabs").show();
-        $("#uploadTab").show();
-        $("#tab-links").show();
+        setState("work");
         //change vals for all selects to current proj
         changeVal();
     });
     $("#manageProjectsLink").click(function(e){
         e.preventDefault();
-        $("#tabs").hide();
-        $("#tab-links").hide();
-        $("#manageProjects").show()
-        
-    })
+        setState("manage");
+    });
     function changeVal(){
         for (var i = 0; i < selectArr.length; i++){
             $("#" + selectArr[i]).val(currProj);
+        }
+    }
+    function setState(state){
+        if (state === "manage"){
+            $("#manageProjects").show()
+            $("#tabs").hide();
+            $("#tab-links").hide();
+        }
+        else if (state === "work"){
+            $("#manageProjects").hide()
+            $("#tabs").show();
+            $("#tab-links").show();
+            changeTab("#uploadTab", mainTabs);
+        }
+        else{
+            $("#manageProjects").hide()
+            $("#tabs").hide();
+            $("#tab-links").show();
+        }
+    }
+    function changeTab(currentAttrValue, allTabs){
+        for (var i = 0; i < allTabs.length; i++){
+            if (allTabs[i] === currentAttrValue){
+                $(allTabs[i]).show();
+            }
+            else{
+                $(allTabs[i]).hide();   
+            }
         }
     }
 });
