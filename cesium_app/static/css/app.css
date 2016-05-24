@@ -197,7 +197,7 @@ section.top-bar-section{
     color: white;
 }
 .projNameSelect{
-    display: none;
+    /*display: none;*/
 }
 .hidden{
     display: none;
@@ -208,4 +208,8 @@ section.top-bar-section{
 #tabs{
     position: relative;
     top: 120px;
+}
+.results-div{
+    position: relative;
+    top: 100px;
 }

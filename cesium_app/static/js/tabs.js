@@ -1,15 +1,27 @@
 $(document).ready(function() {
+    console.log(window.location.pathname);
+
     Foundation.global.namespace = '';
     $(document).foundation();
-    var currProj = "";
+    // var currProj = "";
     var selectArr = ["upload_project_name_select", "transform_data_project_name_select", "featureset_project_name_select", "plot_feats_project_name_select", "buildmodel_project_name_select","prediction_project_name"]
     var mainTabs = ['#uploadTab','#featurizeTab','#buildModelTab', '#predictTab'];
     var featsetTabs = ['#featureset1tab','#featureset2tab','#uploadcustomtab'];
+    var path = window.location.pathname;
+    //state 3
+    if(path === "/featurizing" || path === "/buildingModel" || path === "/predicting"){
+        var proj = "";
+        setState("transition")
+        var currProj = getCurrProj();
+        setCurrProj(currProj);
+    }
+
     $('#tab-links a').on('click', function(e)  {
         e.preventDefault();
         var currentAttrValue = $(this).attr('href');
         // window.location.hash = "panel-" + currentAttrValue.replace('#', '');
         // Show/Hide Tabs
+        setState("work")
         changeTab(currentAttrValue, mainTabs);
         // Change/remove current tab to active
         // $(this).parent('li').addClass('active').siblings().removeClass('active');
@@ -55,19 +67,26 @@ $(document).ready(function() {
     $(".selectProj, .projDropdown").click(function(e){
         e.preventDefault();
         var proj = $(this).attr("data-proj");
-        $("#projTitle").html(proj);
-        currProj = proj;
+        // currProj = proj;
         setState("work");
         //change vals for all selects to current proj
-        changeVal();
+        // debugger;
+        setCurrProj(proj)
+    });
+    $("#featurize_button, #model_build_submit_button, #predict_form_submit_button").click(function(){
+        var proj = $("#projTitle").text();
+        setState("transition", proj)
     });
     $("#manageProjectsLink").click(function(e){
         e.preventDefault();
         setState("manage");
+        // $("#projTitle").html("");
+        setCurrProj("")
     });
-    function changeVal(){
+    function changeVal(proj){
         for (var i = 0; i < selectArr.length; i++){
-            $("#" + selectArr[i]).val(currProj);
+            $("#" + selectArr[i]).val(proj);
+            $("#" + selectArr[i]).trigger("change");
         }
     }
     function setState(state){
@@ -82,7 +101,7 @@ $(document).ready(function() {
             $("#tab-links").show();
             changeTab("#uploadTab", mainTabs);
         }
-        else{
+        else if (state === "transition") {
             $("#manageProjects").hide()
             $("#tabs").hide();
             $("#tab-links").show();
@@ -97,5 +116,18 @@ $(document).ready(function() {
                 $(allTabs[i]).hide();   
             }
         }
+    }
+    function setCurrProj(name){
+        document.cookie = "currProj="+ name;
+        $("#projTitle").html(name);
+        changeVal(name);
+    }
+    function getCurrProj(){
+        return getCookie("currProj")
+    }
+    function getCookie(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
     }
 });

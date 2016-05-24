@@ -411,8 +411,7 @@
                     </div>
                     <div class="large-3 columns">
                          <div class="text-center">
-                            <a href="#" class="button primary upload-button" id="plot_features_button" name="plot_features_button" onclick="plotFeaturesFormSubmit();"><i class="fa fa-line-chart"></i>
-Plot features</a>
+                            <a href="#" class="button primary upload-button" id="plot_features_button" name="plot_features_button" onclick="plotFeaturesFormSubmit();"><i class="fa fa-line-chart"></i>Plot features</a>
                         </div>
                     </div>
                 </div>
@@ -565,50 +564,6 @@ Plot features</a>
             </div>
         </div>
     </div>
-
-<!-- <table>
-<tr>
-<td align='left'>
-    <label>Select project: </label>
-</td>
-<td align='left'>
-    
-    <select id="prediction_project_name" name="prediction_project_name">
-        {% for PROJ_NAME in CURRENT_PROJECTS %}
-            <option value="{{ PROJ_NAME }} ">{{ PROJ_NAME }}</option>
-        {% endfor %}
-        
-    </select>
-</td>
-</tr>
-<tr>
-<td align='left'>
-    <label>Select the model: </label>
-</td>
-<td align='left'>
-    <select id="prediction_model_name_and_type" name="prediction_model_name_and_type">
-        
-    </select>
-</td>
-</tr>
-<tr>
-<td align='left' colspan=2>
-    <div><label>Select dataset:</label>
-    <select id="prediction_dataset_select" name="prediction_dataset_select">
-    </select>
-</div>
-</td>
-</tr>
-<tr>
-<td colspan=3 align='center'>
-<div align='center'>
-    <input type='button' value='Predict' class='submit_button' onclick="predictFormSubmit();" id='predict_form_submit_button'>
-</div>
-</td>
-</tr>
-</table>
-</form> -->
-
 </div>
 
 </div>
@@ -617,51 +572,39 @@ Plot features</a>
 {% endblock %}
 {% block results %}
 <div style='text-align:center'>
-
-
-<div id='results_header' style='display:inline-block;'>
-<b></b>
-</div>
-<BR>
-{% if RESULTS %}
-<br>
-<div id='features_link_div' style="display:none;">
-<a href="#" id="features_link">Show Computed Features</a>
-</div>
-{% endif %}
-<div name='lc_plot_wrapper' style='display:none;float:center;'>
-<div id="lc_plot" name="lc_plot" style="width:400px;height:200px;display:none;float:left;">
-</div>
-<div id="miniature" name='miniature' style="float:left;margin-left:20px;display:inline-block;">
-<div id="overview" name='overview' style="width:166px;height:100px">
-</div>
-<p id="overviewLegend" name='overviewLegend' style="margin-left:10px"></p>
-</div>
-{% if RESULTS %}
-<input type='checkbox' id='show_errors_checkbox' checked name='show_errors_checkbox' onclick='plot_light_curve();'>Show error bars
-{% endif %}
-</div>
-
-<div id="status_div" name="status_div" style="float:center;display:inline-block;">
-
-</div>
-
-<BR><BR>
-<div id="model_build_results" name="model_build_results" style="float:center;display:inline-block;">
-</div>
-
-<BR><BR>
-<div id="pred_results" name="pred_results" style="float:center;display:inline-block;">
-</div>
-
-<BR><BR>
-<div align="center">
-<div id="visualizationDiv" name="visualizationDiv" style="float:left;display:inline-block;width:960px;">
-</div>
-<div id="visualizationLegendDiv" name="visualizationLegendDiv" style="float:left;display:inline-block;width:250px;" align="left">
-</div>
-</div>
-
+    <div class="results-div">
+        <div id='results_header' style='display:inline-block;'>
+            <b></b>
+        </div>
+        <BR>
+        {% if RESULTS %}
+        <br>
+        <div id='features_link_div' style="display:none;">
+            <a href="#" id="features_link">Show Computed Features</a>
+        </div>
+        {% endif %}
+        <div name='lc_plot_wrapper' style='display:none;float:center;'>
+            <div id="lc_plot" name="lc_plot" style="width:400px;height:200px;display:none;float:left;"></div>
+            <div id="miniature" name='miniature' style="float:left;margin-left:20px;display:inline-block;">
+                <div id="overview" name='overview' style="width:166px;height:100px"></div>
+                <p id="overviewLegend" name='overviewLegend' style="margin-left:10px"></p>
+            </div>
+            {% if RESULTS %}
+            <input type='checkbox' id='show_errors_checkbox' checked name='show_errors_checkbox' onclick='plot_light_curve();'>Show error bars
+            {% endif %}
+        </div>
+        <div id="status_div" name="status_div" style="float:center;display:inline-block;">
+        </div>
+        <br><br>
+        <div id="model_build_results" name="model_build_results" style="float:center;display:inline-block;"></div>
+        <br><br>
+        <div id="pred_results" name="pred_results" style="float:center;display:inline-block;"></div>
+        <br><br>
+        <div align="center">
+            <div id="visualizationDiv" name="visualizationDiv" style="float:left;display:inline-block;width:960px;"></div>
+            <div id="visualizationLegendDiv" name="visualizationLegendDiv" style="float:left;display:inline-block;width:250px;" align="left"></div>
+        </div>
+    </div>
 </div>
 </div>
 {% endblock %}
