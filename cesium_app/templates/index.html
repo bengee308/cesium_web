@@ -26,14 +26,13 @@
                             <li class="divider"></li>
                             <li class="has-dropdown not-click">
                             <a href="#">Projects</a>
-                            <ul class="dropdown">
+                            <ul class="dropdown" id="projectsList">
                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                    <li class="active projDropdown" data-proj="{{ PROJ_NAME }}"><a href="#">{{ PROJ_NAME }}</a></li>
+                                    <li class="projDropdown text-left" data-proj="{{ PROJ_NAME }}"><a href="#">{{ PROJ_NAME }}</a></li>
                                 {% endfor %}
                                 <li class="divider"></li>
                                 <li class="text-left"><a href="#" id="manageProjectsLink"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Manage existing projects</a></li>
                                 <li class="text-left"><a href="#" data-reveal-id="createProject"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Create new project</a></li>
-                                <!-- <li class="active" style="z-index: 5"><a href="#">Active link in dropdown</a></li> -->
                             </ul>
                           </li>
                         </ul>

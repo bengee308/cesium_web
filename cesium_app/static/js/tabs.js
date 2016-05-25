@@ -42,15 +42,15 @@ $(document).ready(function() {
         // $(this).parent('li').addClass('active').siblings().removeClass('active');
     });
     $("#header_file_upload, #tarball_file_upload").click(function(e){
-    	e.preventDefault();
-    	var fileTarget = $(this).attr("data-target");
-    	$("#"+ fileTarget).click();
+        e.preventDefault();
+        var fileTarget = $(this).attr("data-target");
+        $("#"+ fileTarget).click();
     });
     $("#headerfile, #zipfile, #custom_feat_script_file").change(function(){
-    	var path = $(this).val();
-    	var filename = path.replace(/^.*\\/, "");
-    	var span = $(this).attr("data-selected");
-    	$(span).text('   '+filename);
+        var path = $(this).val();
+        var filename = path.replace(/^.*\\/, "");
+        var span = $(this).attr("data-selected");
+        $(span).text('   '+filename);
     });
     $('a.custom-close-reveal-modal').click(function(e){
         e.preventDefault();
@@ -96,7 +96,13 @@ $(document).ready(function() {
     $('#model_build_results').bind("DOMSubtreeModified",function(){
         var divText = $(this).text();
         if (divText === "Upload complete."){
-            appendContinueButton("#featurizeTab");
+            $.get("/get_list_of_datasets_by_project/"+String($("#featureset_project_name_select").val()), function(data){
+                // debugger;
+                var selected_project_datasets = data['dataset_list'];
+                populate_select_names_ids('featureset_dataset_select',selected_project_datasets);
+            }).done(function(){
+                appendContinueButton("#featurizeTab");
+            });
         }
         else if (divText === "Featurization of timeseries data complete." || divText === "Featurization completed"){
             appendContinueButton("#buildModelTab");
@@ -107,9 +113,14 @@ $(document).ready(function() {
 
         //handle errors here too
     });
-    $(".continueButton").click(function(){
-        var nexTab = $(this).attr("data-next");
-        changeTab(nextTab);
+    $(document).on('click', '.continueButton', function(){
+        var nextTab = $(this).attr("data-next");
+        console.log(nextTab);
+        // debugger;
+        setState("work");
+        changeTab(nextTab, mainTabs);
+        controlTabs();
+        $(this).hide();
     });
     function changeVal(proj){
         for (var i = 0; i < selectArr.length; i++){
@@ -148,6 +159,14 @@ $(document).ready(function() {
     function setCurrProj(name){
         document.cookie = "currProj="+ name;
         $("#projTitle").html(name);
+        $("#projectsList").children().each(function(i,val){
+            if($(this).attr("data-proj") === name){
+                $(this).addClass("active");
+            }
+            else{
+                $(this).removeClass("active");
+            }
+        });
         changeVal(name);
     }
     function getCurrProj(){
@@ -203,7 +222,7 @@ $(document).ready(function() {
         });  
     }
     function appendContinueButton(next){
-        $(#model_build_results).append("<a href='#'' class='button success continueButton' data-next='" + next + "'>Success Button</a>");
+        $("#model_build_results").append("<div><a href='#'' class='button success continueButton' data-next='" + next + "'>Continue&nbsp;&nbsp;&nbsp;<i class='fa fa-arrow-circle-o-right'></i></a></div>");
     }
     controlTabs();
 });
