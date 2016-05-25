@@ -30,6 +30,7 @@
                                 {% for PROJ_NAME in CURRENT_PROJECTS %}
                                     <li class="active projDropdown" data-proj="{{ PROJ_NAME }}"><a href="#">{{ PROJ_NAME }}</a></li>
                                 {% endfor %}
+                                <li class="divider"></li>
                                 <li class="text-left"><a href="#" id="manageProjectsLink"><i class="fa fa-folder-open"></i>&nbsp;&nbsp;Manage existing projects</a></li>
                                 <li class="text-left"><a href="#" data-reveal-id="createProject"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Create new project</a></li>
                                 <!-- <li class="active" style="z-index: 5"><a href="#">Active link in dropdown</a></li> -->
@@ -41,14 +42,14 @@
         <section class="main-section">
             <div id="tab-links" class="hidden">
                 <div class="small-3 columns progress-bar-component active"><a href="#uploadTab" class="tab-title">Data</a></div>
-                <div class="small-3 columns progress-bar-component light-gray"><a href="#featurizeTab" class="tab-title">Featurize</a>
-                    <div class="arrow-right blue"></div>
+                <div class="small-3 columns progress-bar-component disabled"><a href="#featurizeTab" class="tab-title">Featurize</a>
+                    <div class="arrow-right active"></div>
                 </div>
-                <div class="small-3 columns progress-bar-component light-gray"><a href="#buildModelTab" class="tab-title">Build Model</a>
-                    <div class="arrow-right light-gray"></div>
+                <div class="small-3 columns progress-bar-component disabled"><a href="#buildModelTab" class="tab-title">Build Model</a>
+                    <div class="arrow-right disabled"></div>
                 </div>
-                <div class="small-3 columns progress-bar-component light-gray"><a href="#predictTab" class="tab-title">Predict</a>
-                    <div class="arrow-right light-gray"></div>
+                <div class="small-3 columns progress-bar-component disabled"><a href="#predictTab" class="tab-title">Predict</a>
+                    <div class="arrow-right disabled"></div>
                 </div>
             </div>
             <div id="createProject" class="reveal-modal" data-reveal aria-labelledby="createProjectTitle" aria-hidden="true" role="dialog">
@@ -96,7 +97,7 @@
     <!-- Projects tab -->
         <div id='projectsTab' align='center'>
         </div>
-        <div id="manageProjects">
+        <div id="manageProjects" class="hidden">
             <div class="row">
                 <div class="large-12 columns">
                     <div class="panel">

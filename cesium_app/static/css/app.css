@@ -13,11 +13,16 @@
 .progress-bar-component.active{
     background-color: #008cba;
 }
-.progress-bar-component.light-gray{
+.progress-bar-component.disabled{
+    pointer-events: none;
+    cursor: default;
     background-color: #cec8c8;
 }
-.progress-bar-component.dark-gray{
+/*.progress-bar-component.dark-gray{
     background-color: #b7aaaa;
+}*/
+.progress-bar-component.complete{
+    background-color: #43AC6A;
 }
 
 .arrow-right {
@@ -42,15 +47,18 @@
     top:-26px;
     right:1px;
 }
-.arrow-right.blue:after{
+.arrow-right.active:after{
     border-left: 26px solid #008cba;
 }
-.arrow-right.light-gray:after{
+.arrow-right.complete:after{
+    border-left: 26px solid #43AC6A;
+}
+.arrow-right.disabled:after{
     border-left: 26px solid #cec8c8;
-}
-.arrow-right.dark-gray:after{
+}                 
+/*.arrow-right.dark-gray:after{
     border-left: 26px solid #b7aaaa;
-}
+}*/
 .upload-button{
     padding: 10px !important;
 }
