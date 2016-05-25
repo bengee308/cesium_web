@@ -90,6 +90,27 @@ $(document).ready(function() {
         // $("#projTitle").html("");
         setCurrProj("")
     });
+    // $("#model_build_results").change(function(){
+    //     console.log($(this).text());
+    // });
+    $('#model_build_results').bind("DOMSubtreeModified",function(){
+        var divText = $(this).text();
+        if (divText === "Upload complete."){
+            appendContinueButton("#featurizeTab");
+        }
+        else if (divText === "Featurization of timeseries data complete." || divText === "Featurization completed"){
+            appendContinueButton("#buildModelTab");
+        }
+        else if (divText === "New model successfully created"){
+            appendContinueButton("#predictTab");
+        }
+
+        //handle errors here too
+    });
+    $(".continueButton").click(function(){
+        var nexTab = $(this).attr("data-next");
+        changeTab(nextTab);
+    });
     function changeVal(proj){
         for (var i = 0; i < selectArr.length; i++){
             $("#" + selectArr[i]).val(proj);
@@ -158,18 +179,13 @@ $(document).ready(function() {
             selected_project_datasets = data['dataset_list'];
             // populate_select_names_ids('transform_data_dataset_select',selected_project_datasets);
         }).done(function(){
-            console.log("i finished first");
-            console.log(selected_project_datasets);
             if(selected_project_datasets.length){
                 count+=1;
             }
-            console.log(count)
         }).then(function(){
             $.get("/get_list_of_featuresets_by_project/"+String($("#buildmodel_project_name_select").val()), function(data){
                 selected_project_featset_names = data['featset_list'];
             }).done(function(){
-                console.log("i finished second");
-                console.log(selected_project_featset_names)
                 if(selected_project_featset_names.length){
                     count+=1;
                 }
@@ -178,26 +194,16 @@ $(document).ready(function() {
                     selected_project_model_names = data['model_list'];
                     populate_select_options('prediction_model_name_and_type',selected_project_model_names);
                 }).done(function(){
-                    console.log("i finished third");
-                    console.log(selected_project_model_names);
                     if(selected_project_model_names.length){
                         count+=1;
                     }
-                    console.log(count)
                     setTabState(count);
                 })
             });
-        });
-        // var count = 0;
-        // // debugger;
-        // for(var i = 0; i < controlSelects.length; i++){
-            
-        //     if ($(controlSelects[i]+" option").size() > 0){
-        //         count += 1;
-        //         console.log(count)
-        //     }
-        // }
-        // setTabState(count);    
+        });  
+    }
+    function appendContinueButton(next){
+        $(#model_build_results).append("<a href='#'' class='button success continueButton' data-next='" + next + "'>Success Button</a>");
     }
     controlTabs();
 });
