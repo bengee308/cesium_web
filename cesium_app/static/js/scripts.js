@@ -304,7 +304,13 @@ function editOrDeleteProjectFormSubmit(){
               </div>\
               </div>\
               </form>\
+              <div class='row'>\
+              <div class='text-center'>\
+              <a href='#'' class='button primary upload-button' id='editProjectSubmit'> Submit</a>\
+              </div>\
+              </div>\
               <a class='close-reveal-modal' aria-label='Close'>&#215;</a></div>\
+              <br>\
               </div>"
               $('body').append(modal);
               $(document).foundation();
@@ -434,7 +440,31 @@ function editOrDeleteProjectFormSubmit(){
     });
 }
 
+$(document).on('click', "#editProjectSubmit", function(){
+  console.log("called");
+  if($.trim($("#project_name_edit").val())==""){
+    alert("Project Name must contain non-whitespace characters. Please try another name.");
+  }else{
+   $("#editProjectForm").ajaxSubmit({
+       success: function(editResponse){
 
+           var $projectEditedDialog = $('<div id="projectEditedDialog" class="projectEditedDialog"></div>')
+                   .html("Project info saved.")
+                   .dialog({
+                       autoOpen: true,
+                       buttons:[{text: "Ok", click: function(){ $("#projectEditedDialog").dialog("close"); } } ]
+                       //position: ['center', 20]
+                   });
+
+           $("#projectEditedDialog").bind("dialogclose", function(event){
+               window.location.replace("http://"+location.host);
+           });
+
+           $("#editDeleteResultsDialog").dialog("destroy").remove();
+       }
+   });
+  }
+});
 
 
 
