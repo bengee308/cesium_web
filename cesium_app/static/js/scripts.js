@@ -285,6 +285,24 @@ function editOrDeleteProjectFormSubmit(){
               " + response['datasets'] + " \
               </div>\
               </div>\
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <div onclick=\"$('#features_table').toggle('slow');\"><label>Feature sets (click to show/hide table):</label></div> \
+              " + response['featuresets'] + " \
+              </div>\
+              </div>\
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <div onclick=\"$('#models_table').toggle('slow');\"><label>Models (click to show/hide table):</label></div> \
+              " + response['models'] + " \
+              </div>\
+              </div>\
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <div onclick=\"$('#predictions_table').toggle('slow');\"><label>Predictions (click to show/hide table):</label></div> \
+              " + response['predictions'] + " \
+              </div>\
+              </div>\
               </form>\
               <a class='close-reveal-modal' aria-label='Close'>&#215;</a></div>\
               </div>"

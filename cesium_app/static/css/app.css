@@ -221,3 +221,10 @@ section.top-bar-section{
     position: relative;
     top: 100px;
 }
+#editDeleteResultsDialog{
+    height: 50%;    
+}
+#editProjectForm{
+    height: 90%;
+    overflow: auto;
+}
