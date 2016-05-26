@@ -247,122 +247,166 @@ function editOrDeleteProjectFormSubmit(){
                 });
 
             }else if($("#action").val()=="Edit"){
+              $('#editDeleteResultsDialog').remove();
+              var modal = "<div id='editDeleteResultsDialog' class='reveal-modal' data-reveal aria-labelledby='editProjTitle' aria-hidden='true' role='dialog'>\
+              <h3 id='editProjTitle'>Edit Project</h3>\
+              <form id='editProjectForm' name='editProjectForm' action='/editProjectForm' enctype='multipart/form-data' method='post'> \
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <label>Project Name\
+              <input type='text' name='project_name_edit' id='project_name_edit' class='stylized_input' size='30' value='"+response['name']+"'><input type='hidden' name='project_name_orig' id='project_name_orig' value='"+response['name']+"'><div id='edit_proj_name_okay_div' name='edit_proj_name_okay_div'></div> \
+              </label>\
+              </div>\
+              </div>\
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <label>Created\
+              <input type='text' name='date_created' id='date_created' class='stylized_input' size='50' value='"+response['created']+"' disabled> \
+              </label>\
+              </div>\
+              </div>\
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <label>Description/Notes\
+              <textarea id='project_description_edit' name='project_description_edit' rows='3' cols='50'>"+response['description']+" </textarea> \
+              </label>\
+              </div>\
+              </div>\
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <label>Additional Authorized Users<span class='small'>Enter Google account usernames <br>(separated by a comma) of <br>those you wish to have access to this project</span>\
+              <textarea id='addl_authed_users_edit' name ='addl_authed_users_edit' rows='3' cols='50'>" + response['authed_users'].join() + "</textarea> \
+              </label>\
+              </div>\
+              </div>\
+              <div class='row'>\
+              <div class='large-12 columns'>\
+              <div onclick=\"$('#datasets_table').toggle('slow');\"><label>Data sets (click to show/hide table):</label></div> \
+              " + response['datasets'] + " \
+              </div>\
+              </div>\
+              </form>\
+              <a class='close-reveal-modal' aria-label='Close'>&#215;</a></div>\
+              </div>"
+              $('body').append(modal);
+              $(document).foundation();
+              $('#editDeleteResultsDialog').foundation('reveal', 'open');
 
-                var $editDeleteResultsDialog = $('<div id="editDeleteResultsDialog" class="editDeleteResultsDialog"></div>')
-                        .html("<form id='editProjectForm' name='editProjectForm' action='/editProjectForm' enctype='multipart/form-data' method='post'> \
-                              <table> \
-                              <tr> \
-                              <td align='left'> \
-                              <label>Project Name</label> \
-                              </td> \
-                              <td align='left' colspan=4> \
-                              <div><input type='text' name='project_name_edit' id='project_name_edit' class='stylized_input' size='30' value='"+response['name']+"'><input type='hidden' name='project_name_orig' id='project_name_orig' value='"+response['name']+"'></div><div id='edit_proj_name_okay_div' name='edit_proj_name_okay_div'></div> \
-                              </td> \
-                              </tr> \
-                              <tr> \
-                              <td align='left'> \
-                              <label>Created</label> \
-                              </td> \
-                              <td align='left' colspan=4> \
-                              <div><input type='text' name='date_created' id='date_created' class='stylized_input' size='50' value='"+response['created']+"' disabled> \
-                              </td> \
-                              </tr> \
-                              <tr> \
-                              <td align='left'> \
-                              <label>Description/notes</label> \
-                              </td> \
-                              <td colspan=4> \
-                              <textarea id='project_description_edit' name='project_description_edit' rows='3' cols='50'>"+response['description']+" </textarea> \
-                              </td> \
-                              </tr> \
-                              <tr> \
-                              <td align='left'> \
-                              <label>Additional Authorized Users<span class='small'>Enter Google account usernames <br>(separated by a comma) of <br>those you wish to have access to this project</span></label> \
-                              </td> \
-                              <td colspan=4> \
-                              <textarea id='addl_authed_users_edit' name ='addl_authed_users_edit' rows='3' cols='50'>" + response['authed_users'].join() + "</textarea> \
-                              </td> \
-                              <td> \
-                              </td> \
-                              </tr> \
-                              <tr> <td><BR></td></tr><tr>\
-                              <td align='left' colspan=3> \
-                              <div onclick=\"$('#datasets_table').toggle('slow');\"><label>Data sets (click to show/hide table):</label></div> \
-                              </td> \
-                              </tr> \
-                              </table> \
-                              " + response['datasets'] + " \
-                              <table><tr> <td><BR></td></tr><tr> \
-                              <td align='left' colspan=3> \
-                              <div onclick=\"$('#features_table').toggle('slow');\"><label>Feature sets (click to show/hide table):</label></div> \
-                              </td> \
-                              </tr> \
-                              </table> \
-                              " + response['featuresets'] + " \
-                              <table><tr> <td><BR></td></tr><tr> \
-                              <td align='left' colspan=3> \
-                              <div onclick=\"$('#models_table').toggle('slow');\"><label>Models (click to show/hide table):</label></div> \
-                              </td> \
-                              </tr> \
-                              </table> \
-                              " + response['models'] + " \
-                              <table><tr> <td><BR></td></tr><tr>\
-                              <td align='left' colspan=3> \
-                              <div onclick=\"$('#predictions_table').toggle('slow');\"><label>Predictions (click to show/hide table):</label></div> \
-                              </td> \
-                              </tr> \
-                              </table> \
-                              " + response['predictions'] + " \
-                              </form>")
-                        .dialog({
-                            height:700,
-                            width:850,
-                            autoOpen: true,
-                            title: 'Edit Project Details',
-                            buttons: [{text:"Submit", click:
-                                       function(){
+                // var $editDeleteResultsDialog = $('<div id="editDeleteResultsDialog" class="editDeleteResultsDialog"></div>')
+                //         .html("<form id='editProjectForm' name='editProjectForm' action='/editProjectForm' enctype='multipart/form-data' method='post'> \
+                //               <table> \
+                //               <tr> \
+                //               <td align='left'> \
+                //               <label>Project Name</label> \
+                //               </td> \
+                //               <td align='left' colspan=4> \
+                //               <div><input type='text' name='project_name_edit' id='project_name_edit' class='stylized_input' size='30' value='"+response['name']+"'><input type='hidden' name='project_name_orig' id='project_name_orig' value='"+response['name']+"'></div><div id='edit_proj_name_okay_div' name='edit_proj_name_okay_div'></div> \
+                //               </td> \
+                //               </tr> \
+                //               <tr> \
+                //               <td align='left'> \
+                //               <label>Created</label> \
+                //               </td> \
+                //               <td align='left' colspan=4> \
+                //               <div><input type='text' name='date_created' id='date_created' class='stylized_input' size='50' value='"+response['created']+"' disabled> \
+                //               </td> \
+                //               </tr> \
+                //               <tr> \
+                //               <td align='left'> \
+                //               <label>Description/notes</label> \
+                //               </td> \
+                //               <td colspan=4> \
+                //               <textarea id='project_description_edit' name='project_description_edit' rows='3' cols='50'>"+response['description']+" </textarea> \
+                //               </td> \
+                //               </tr> \
+                //               <tr> \
+                //               <td align='left'> \
+                //               <label>Additional Authorized Users<span class='small'>Enter Google account usernames <br>(separated by a comma) of <br>those you wish to have access to this project</span></label> \
+                //               </td> \
+                //               <td colspan=4> \
+                //               <textarea id='addl_authed_users_edit' name ='addl_authed_users_edit' rows='3' cols='50'>" + response['authed_users'].join() + "</textarea> \
+                //               </td> \
+                //               <td> \
+                //               </td> \
+                //               </tr> \
+                //               <tr> <td><BR></td></tr><tr>\
+                //               <td align='left' colspan=3> \
+                //               <div onclick=\"$('#datasets_table').toggle('slow');\"><label>Data sets (click to show/hide table):</label></div> \
+                //               </td> \
+                //               </tr> \
+                //               </table> \
+                //               " + response['datasets'] + " \
+                //               <table><tr> <td><BR></td></tr><tr> \
+                //               <td align='left' colspan=3> \
+                //               <div onclick=\"$('#features_table').toggle('slow');\"><label>Feature sets (click to show/hide table):</label></div> \
+                //               </td> \
+                //               </tr> \
+                //               </table> \
+                //               " + response['featuresets'] + " \
+                //               <table><tr> <td><BR></td></tr><tr> \
+                //               <td align='left' colspan=3> \
+                //               <div onclick=\"$('#models_table').toggle('slow');\"><label>Models (click to show/hide table):</label></div> \
+                //               </td> \
+                //               </tr> \
+                //               </table> \
+                //               " + response['models'] + " \
+                //               <table><tr> <td><BR></td></tr><tr>\
+                //               <td align='left' colspan=3> \
+                //               <div onclick=\"$('#predictions_table').toggle('slow');\"><label>Predictions (click to show/hide table):</label></div> \
+                //               </td> \
+                //               </tr> \
+                //               </table> \
+                //               " + response['predictions'] + " \
+                //               </form>")
+                //         .dialog({
+                //             height:700,
+                //             width:850,
+                //             autoOpen: true,
+                //             title: 'Edit Project Details',
+                //             buttons: [{text:"Submit", click:
+                //                        function(){
 
 
-                                           if($.trim($("#project_name_edit").val())==""){
-                                               alert("Project Name must contain non-whitespace characters. Please try another name.");
-                                           }else{
+                //                            if($.trim($("#project_name_edit").val())==""){
+                //                                alert("Project Name must contain non-whitespace characters. Please try another name.");
+                //                            }else{
 
 
-                                               $("#editProjectForm").ajaxSubmit({
-                                                   success: function(editResponse){
+                //                                $("#editProjectForm").ajaxSubmit({
+                //                                    success: function(editResponse){
 
-                                                       var $projectEditedDialog = $('<div id="projectEditedDialog" class="projectEditedDialog"></div>')
-                                                               .html("Project info saved.")
-                                                               .dialog({
-                                                                   autoOpen: true,
-                                                                   buttons:[{text: "Ok", click: function(){ $("#projectEditedDialog").dialog("close"); } } ]
-                                                                   //position: ['center', 20]
-                                                               });
+                //                                        var $projectEditedDialog = $('<div id="projectEditedDialog" class="projectEditedDialog"></div>')
+                //                                                .html("Project info saved.")
+                //                                                .dialog({
+                //                                                    autoOpen: true,
+                //                                                    buttons:[{text: "Ok", click: function(){ $("#projectEditedDialog").dialog("close"); } } ]
+                //                                                    //position: ['center', 20]
+                //                                                });
 
-                                                       $("#projectEditedDialog").bind("dialogclose", function(event){
-                                                           window.location.replace("http://"+location.host);
-                                                       });
+                //                                        $("#projectEditedDialog").bind("dialogclose", function(event){
+                //                                            window.location.replace("http://"+location.host);
+                //                                        });
 
-                                                       $("#editDeleteResultsDialog").dialog("destroy").remove();
-                                                   }
-                                               });
-                                           }
-                                       }
-                                      }]
-                            //position: ['center', 20]
-                        });
+                //                                        $("#editDeleteResultsDialog").dialog("destroy").remove();
+                //                                    }
+                //                                });
+                //                            }
+                //                        }
+                //                       }]
+                //             //position: ['center', 20]
+                //         });
 
-                $(".feats_used_div").dialog({autoOpen: false, maxHeight: 650, width: 500 } );
-                $(".pred_results_dialog_div").dialog({autoOpen: false, maxHeight: 650, width:600} );
-                $("#editDeleteResultsDialog").bind("dialogclose", function(event){
-                    $("#editDeleteResultsDialog").dialog("destroy").remove();
-                });
+                // $(".feats_used_div").dialog({autoOpen: false, maxHeight: 650, width: 500 } );
+                // $(".pred_results_dialog_div").dialog({autoOpen: false, maxHeight: 650, width:600} );
+                // $("#editDeleteResultsDialog").bind("dialogclose", function(event){
+                //     $("#editDeleteResultsDialog").dialog("destroy").remove();
+                // });
 
-                $.get("/get_list_of_projects", function(data){
-                    var current_projects=data['list'];
-                    current_projects.splice(current_projects.indexOf(response['name']),1);
-                    enforce_unique_name('edit_project_button','project_name_edit','edit_proj_name_okay_div',current_projects);
-                });
+                // $.get("/get_list_of_projects", function(data){
+                //     var current_projects=data['list'];
+                //     current_projects.splice(current_projects.indexOf(response['name']),1);
+                //     enforce_unique_name('edit_project_button','project_name_edit','edit_proj_name_okay_div',current_projects);
+                // });
 
 
             }
