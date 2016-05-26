@@ -379,15 +379,13 @@
                         <a href="#" class="button primary upload-button" id="featurize_button" name="featurize_button" onclick="featurizeFormSubmit();"> Generate features</a>
                     </div>
                 </div>
-            <table id='featurize_data_table'>
-                <tr>
-                    <td align='left'>
-                        <div onclick="uploadFeaturesFormDialog();" class='hover_bgcolor_div'>
-                            <i><h3>Upload Features:</h3></i><span class='small'>Click here to upload your pre-featurized data set</span>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <h4>Upload features from pre-featurized data set:</h4>
+            <div class="row">
+                <div class="large-12 columns">
+                    <a href="#" class="button primary upload-button" data-reveal-id="uploadFeaturesFormModal" id="header_file_upload">
+                    <i class="fa fa-upload"></i>&nbsp;&nbsp;Upload</a> 
+                </div>
+            </div>
         </form>
         <h4 class="left">Plot features from Existing Feature Set:</h4>
             <form id='plotFeaturesForm' action="/plotFeatures" enctype="multipart/form-data" method="post">
@@ -418,6 +416,60 @@
             </form>
             </div>
         </div>
+    </div>
+    <div id="uploadFeaturesFormModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+      <h4>Upload Custom Features</h4>
+        <form id='uploadFeaturesForm' name='uploadFeaturesForm' action='/uploadFeaturesForm' enctype='multipart/form-data' method='post'>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label class="projNameSelect">Project name:
+                        <select id='featureset_projname_select' name='featureset_projname_select'>
+                            {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                <option value="{{ PROJ_NAME }}">{{ PROJ_NAME }}</option>
+                            {% endfor %}
+                        </select>
+
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>Feature set name:
+                        <input type='text' id='featuresetname' name='featuresetname'><div id='featsetname_okay_div' name='featsetname_okay_div'></div>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <label>Select features file:
+                        <br>
+                        <a href="#" class="button primary upload-button" id="feat_file_upload" data-target="features_file"><i class="fa fa-folder-open-o"></i>
+                        Choose File</a> <span id="feat_file_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
+                        <input type='file' id='features_file' name='features_file' class='stylized_input' data-selected="#feat_file_selected">
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center">
+                    <a href="#" class="button primary upload-button" id="uploadfeaturesbutton" name="uploadfeaturesbutton"> Submit</a>
+                    <!-- <input type='submit' value='Submit' id='uploadfeaturesbutton' name='uploadfeaturesbutton'> -->
+                </div>
+            </div>
+<!--           <table>\
+          <tr>\
+          <td><label>Project name:</label></td>\
+          <td><select id='featureset_projname_select' name='featureset_projname_select'></select></td>\
+          </tr>\
+          <tr><td><label>Feature set name:</label></td><td><input type='text' id='featuresetname' name='featuresetname'><div id='featsetname_okay_div' name='featsetname_okay_div'></div></td></tr>\
+          <tr><td><label>Select features file:</label></td>\
+          <td><input type='file' id='features_file' name='features_file' class='stylized_input'></td>\
+          </tr>\
+          <tr>\
+          <td align='center' colspan=2><input type='submit' value='Submit' id='uploadfeaturesbutton' name='uploadfeaturesbutton'></td>\
+          </tr>\
+          </table>\ -->
+        </form>
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
 </div>
 

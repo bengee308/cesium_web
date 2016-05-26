@@ -4,14 +4,14 @@ $(document).ready(function() {
     Foundation.global.namespace = '';
     $(document).foundation();
     // Constants
-    var selectArr = ["upload_project_name_select", "transform_data_project_name_select", "featureset_project_name_select", "plot_feats_project_name_select", "buildmodel_project_name_select","prediction_project_name"]
+    var selectArr = ["upload_project_name_select", "transform_data_project_name_select", "featureset_project_name_select", "plot_feats_project_name_select", "buildmodel_project_name_select","prediction_project_name","featureset_projname_select"]
     var mainTabs = ['#uploadTab','#featurizeTab','#buildModelTab', '#predictTab'];
     var featsetTabs = ['#featureset1tab','#featureset2tab','#uploadcustomtab'];
     var tabStates = [["active", "disabled","disabled","disabled"], ["complete", "active", "disabled", "disabled"], ["complete", "complete", "active", "disabled"], ["complete", "complete", "complete", "active"], ["complete", "complete", "complete", "complete"]];
     var controlSelects = ["#featureset_dataset_select","#modelbuild_featset_name_select","#prediction_model_name_and_type"] 
     var path = window.location.pathname;
     //state 3
-    if(path === "/featurizing" || path === "/buildingModel" || path === "/predicting"){
+    if(path === "/featurizing" || path === "/buildingModel" || path === "/predicting" || path === "/uploadFeaturesForm"){
         setState("transition")
         var currProj = getCurrProj();
         setCurrProj(currProj);
@@ -41,12 +41,12 @@ $(document).ready(function() {
         // Change/remove current tab to active
         // $(this).parent('li').addClass('active').siblings().removeClass('active');
     });
-    $("#header_file_upload, #tarball_file_upload").click(function(e){
+    $("#header_file_upload, #tarball_file_upload, #feat_file_upload").click(function(e){
         e.preventDefault();
         var fileTarget = $(this).attr("data-target");
         $("#"+ fileTarget).click();
     });
-    $("#headerfile, #zipfile, #custom_feat_script_file").change(function(){
+    $("#headerfile, #zipfile, #custom_feat_script_file, #features_file").change(function(){
         var path = $(this).val();
         var filename = path.replace(/^.*\\/, "");
         var span = $(this).attr("data-selected");
@@ -121,6 +121,10 @@ $(document).ready(function() {
         changeTab(nextTab, mainTabs);
         controlTabs();
         $(this).hide();
+    });
+    $("#uploadfeaturesbutton").click(function(){
+        $("#uploadFeaturesForm").submit();
+        return false;
     });
     function changeVal(proj){
         for (var i = 0; i < selectArr.length; i++){
@@ -225,4 +229,27 @@ $(document).ready(function() {
         $("#model_build_results").append("<div><a href='#'' class='button success continueButton' data-next='" + next + "'>Continue&nbsp;&nbsp;&nbsp;<i class='fa fa-arrow-circle-o-right'></i></a></div>");
     }
     controlTabs();
+    // $.get("/get_list_of_projects", function(data){
+    //     console.log(data);
+    //     populate_select_options('featureset_projname_select',data['list']);
+    // }).done(function(){
+
+    // });
+
+
+
+
+    if( $("#featureset_projname_select").length > 0 && $("#featureset_projname_select").val() != null && $("#featureset_projname_select").val() != "null"){
+        $.get("/get_list_of_featuresets_by_project/"+String($("#featureset_projname_select").val()), function(data){
+            var selected_project_featureset_names = data['featset_list'];
+            enforce_unique_name('uploadfeaturesbutton','featuresetname','featsetname_okay_div',selected_project_featureset_names);
+        }); }
+
+    $("#featureset_projname_select").change( function(){
+
+        $.get("/get_list_of_featuresets_by_project/"+String($("#featureset_projname_select").val()), function(data){
+            var selected_project_featureset_names = data['featset_list'];
+            enforce_unique_name('uploadfeaturesbutton','featuresetname','featsetname_okay_div',selected_project_featureset_names);
+        });
+    });
 });
