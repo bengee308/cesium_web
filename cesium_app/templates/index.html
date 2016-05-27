@@ -831,7 +831,7 @@ $(document).ready(function(){
 
 $('#results_header').html("<b>Generating features for new feature set {{ featureset_name }}:</b>");
 
-$('#tabs').tabs( "option", "active", false);
+// $('#tabs').tabs( "option", "active", false);
 
 var checkStatus = setInterval(
 function(){
@@ -845,7 +845,7 @@ $.get("/load_featurization_results/{{ new_featset_key }}", function(data){
 $("#model_build_results").html(data["results_msg"]);
 
 });
-$('#tabs').tabs( "option", "active", false);
+// $('#tabs').tabs( "option", "active", false);
 drawScatterplotMatrix("/features_data/{{ new_featset_key }}_features_with_targets.csv");
 clearInterval(checkStatus);
 }
@@ -856,7 +856,7 @@ clearInterval(checkStatus);
 {% elif ACTION == "uploaded" %}
 $(document).ready(function(){
 $('#results_header').html("<b>New feature set {{ featureset_name }} uploaded.</b>");
-$('#tabs').tabs( "option", "active", false);
+// $('#tabs').tabs( "option", "active", false);
 });
 
 
@@ -867,7 +867,7 @@ $('#tabs').tabs( "option", "active", false);
 
 $(document).ready(function(){
 
-$('#tabs').tabs( "option", "active", false);
+// $('#tabs').tabs( "option", "active", false);
 
 $("#results_header").html("<b>Prediction Results for model {{ prediction_model_name }} - {{ model_type }}</b>");
 
@@ -911,7 +911,7 @@ $(document).ready(function(){
 
 
 
-$('#tabs').tabs( "option", "active", 0);
+// $('#tabs').tabs( "option", "active", 0);
 
 $("#survey_pred_results").html("<img src='/static/media/spinner_black.gif'> Processing survey classification...");
 $("#pred_results").html("<img src='/static/media/spinner_black.gif'> Processing science classification...");
