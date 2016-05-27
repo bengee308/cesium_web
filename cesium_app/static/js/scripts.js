@@ -1654,50 +1654,27 @@ function fileUpload(form, action_url, div_id) {
 function init_dialogs(){
 
 
-    var $features_dialog = $('<div id="features" class="features_dialog" title="Features"></div>')
-            .html("No features yet...")
-            .dialog({
-                height:500,
-                width:600,
-                autoOpen: false,
-                title: 'Time Series Data Features',
-                position: ['center', 20]
-            });
-
-    $('#features_link').click(function() {
-        // $features_dialog.dialog('open');
-        // prevent the default action, e.g., following a link
-        return false;
-    });
-
-
-    $("#features").bind("clickoutside", function(event){
-        $(this).dialog("close");
-    });
-
-
-    // var $feature_selection_dialog = $('<div id="feature_selection_dialog" class="feature_selection_dialog" align="left"></div>')
-    //         .html("Using all features for now...")
+    // var $features_dialog = $('<div id="features" class="features_dialog" title="Features"></div>')
+    //         .html("No features yet...")
     //         .dialog({
     //             height:500,
     //             width:600,
     //             autoOpen: false,
-    //             title: 'Feature Selection',
-    //             position: ['center', 20],
-    //             buttons: [{text:"Done",click:function(){$(this).dialog("close");}}]
+    //             title: 'Time Series Data Features',
+    //             position: ['center', 20]
     //         });
 
-
-    // $("#feature_selection_dialog").bind("clickoutside", function(event){
-        // $(this).dialog("close");
-    // });
-
-
-    // $('#feature_selection_link').click(function() {
-    //     $feature_selection_dialog.dialog('open');
+    // $('#features_link').click(function() {
+    //     // $features_dialog.dialog('open');
     //     // prevent the default action, e.g., following a link
     //     return false;
     // });
+
+
+    // $("#features").bind("clickoutside", function(event){
+    //     $(this).dialog("close");
+    // });
+
 
 
     var $predict_metadata_format_dialog = $("<div id='predict_metadata_format_dialog' class='editDeleteResultsDialog'></div>")

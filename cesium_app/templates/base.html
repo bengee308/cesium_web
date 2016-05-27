@@ -56,11 +56,11 @@
         
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         
-        $(function() {
-                $( "#tabs" ).tabs({
-                        collapsible: true
-                });
-        });
+        // $(function() {
+        //         $( "#tabs" ).tabs({
+        //                 collapsible: true
+        //         });
+        // });
         
         {% block script %}
         

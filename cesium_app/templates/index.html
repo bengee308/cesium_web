@@ -305,7 +305,7 @@
                 <h3 id="modalTitle">Feature Selection</h3>
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 <div class="tabs">
-                    <ul class="tab-links" id="feature-tab-links">
+                    <ul class="tab-links">
                         <li class="active"><a href="#featureset1tab">Feature set 1</a></li>
                         <li><a href="#featureset2tab">Feature set 2</a></li>
                         <li> <a href="#uploadcustomtab">Upload custom feature definitions</a></li>
@@ -452,7 +452,6 @@
             <div class="row">
                 <div class="text-center">
                     <a href="#" class="button primary upload-button" id="uploadfeaturesbutton" name="uploadfeaturesbutton"> Submit</a>
-                    <!-- <input type='submit' value='Submit' id='uploadfeaturesbutton' name='uploadfeaturesbutton'> -->
                 </div>
             </div>
 <!--           <table>\
@@ -762,9 +761,6 @@ var customfeats_html_str = "Select .py file containing your custom feature defin
 $('#uploadcustomtab').html(customfeats_html_str);
 
 
-// $('#feature_selection_dialog').parent().appendTo($("#featurizeForm"));
-
-// $("#feature_selection_dialog_tabs").tabs();
 
 });
 {% if RESULTS %}
@@ -812,7 +808,7 @@ clearInterval(checkStatus);
 $(document).ready(function(){
 
 var index = $('#tabs a[href="#featurizeTab"]').parent().index();
-$('#tabs').tabs( "option", "active", false);
+// $('#tabs').tabs( "option", "active", false);
 
 $("#results_header").html("<b>{{ PROJECT_NAME }}:</b>");
 
