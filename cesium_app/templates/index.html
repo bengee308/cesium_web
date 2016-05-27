@@ -331,16 +331,15 @@
                             <br>
                             <div id='script_file_input_div'>
                                 <label for="custom_feat_script_file">
-                                    <a href="#" class="button primary upload-button fileUpload" id="custom_feat_script_file_upload" data-target="custom_feat_script_file">
+                                    <a href="#" class="button info upload-button fileUpload" id="custom_feat_script_file_upload" data-target="custom_feat_script_file">
                                         <i class="fa fa-folder-open-o"></i>
                                         Choose File</a> <span id="custom_feat_script_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
                                 </label>
-                                <input id='custom_feat_script_file' name='custom_feat_script_file' type='file' data-selected="#custom_feat_script_selected"/>
+                                
                             </div>
-                                <br>
                                 <input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>
-                                <div>
-                                    <input type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();' value='Click to test'>
+                                <div class="text-center">
+                                    <button type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();'>Click to test</button>
                                 </div>
                                 <div id='file_upload_message_div'></div>
                             </div>
@@ -350,6 +349,7 @@
                         <i class="fa fa-check"></i>
                     Done</a>
                 </div>
+                <input id='custom_feat_script_file' name='custom_feat_script_file' type='file' data-selected="#custom_feat_script_selected"/>
                 <div class="row">
                     <div class="large-12 columns">
                         <label>
