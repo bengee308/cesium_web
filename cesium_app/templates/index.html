@@ -179,7 +179,7 @@
                             <div class="medium-4 columns">
                                 <label for="headerfile" class="header-label">Header File
                                     <br>
-                                    <a href="#" class="button primary upload-button" id="header_file_upload" data-target="headerfile">
+                                    <a href="#" class="button primary upload-button fileUpload" data-target="headerfile">
                                         <i class="fa fa-folder-open-o"></i>
                                         Choose File</a> <span id="headerfile_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
                                     
@@ -189,7 +189,7 @@
                                 <div class="medium-4 columns">
                                     <label for="zipfile" class="header-label">Tarball containing data
                                         <br>
-                                        <a href="#" class="button primary upload-button" id="tarball_file_upload" data-target="zipfile"><i class="fa fa-folder-open-o"></i>
+                                        <a href="#" class="button primary upload-button fileUpload" data-target="zipfile"><i class="fa fa-folder-open-o"></i>
                                             Choose File</a> <span id="tarball_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
                                         <input type='file' name='zipfile' id='zipfile' class="stylized_input" data-selected="#tarball_selected">
                                     </label>
@@ -305,7 +305,7 @@
                 <h3 id="modalTitle">Feature Selection</h3>
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                 <div class="tabs">
-                    <ul class="tab-links">
+                    <ul class="tab-links" id="feature-tab-links">
                         <li class="active"><a href="#featureset1tab">Feature set 1</a></li>
                         <li><a href="#featureset2tab">Feature set 2</a></li>
                         <li> <a href="#uploadcustomtab">Upload custom feature definitions</a></li>
@@ -331,12 +331,12 @@
                             <br>
                             <div id='script_file_input_div'>
                                 <label for="custom_feat_script_file">
-                                    <a href="#" class="button primary upload-button" id="custom_feat_script_file_upload">
+                                    <a href="#" class="button primary upload-button fileUpload" id="custom_feat_script_file_upload" data-target="custom_feat_script_file">
                                         <i class="fa fa-folder-open-o"></i>
                                         Choose File</a> <span id="custom_feat_script_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
                                 </label>
-                                    <input id='custom_feat_script_file' name='custom_feat_script_file' type='file' data-selected="#custom_feat_script_selected"/>
-                                </div>
+                                <input id='custom_feat_script_file' name='custom_feat_script_file' type='file' data-selected="#custom_feat_script_selected"/>
+                            </div>
                                 <br>
                                 <input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>
                                 <div>
@@ -382,7 +382,7 @@
             <h4>Upload features from pre-featurized data set:</h4>
             <div class="row">
                 <div class="large-12 columns">
-                    <a href="#" class="button primary upload-button" data-reveal-id="uploadFeaturesFormModal" id="header_file_upload">
+                    <a href="#" class="button primary upload-button" data-reveal-id="uploadFeaturesFormModal">
                     <i class="fa fa-upload"></i>&nbsp;&nbsp;Upload</a> 
                 </div>
             </div>
@@ -443,7 +443,7 @@
                 <div class="large-12 columns">
                     <label>Select features file:
                         <br>
-                        <a href="#" class="button primary upload-button" id="feat_file_upload" data-target="features_file"><i class="fa fa-folder-open-o"></i>
+                        <a href="#" class="button primary upload-button fileUpload" data-target="features_file"><i class="fa fa-folder-open-o"></i>
                         Choose File</a> <span id="feat_file_selected">&nbsp;&nbsp;&nbsp;No file selected.</span>
                         <input type='file' id='features_file' name='features_file' class='stylized_input' data-selected="#feat_file_selected">
                     </label>
@@ -727,38 +727,38 @@ $(".model_params_tr.currently_selected").hide();
 $(".model_params_tr.currently_selected").show();
 }
 });
-var feature_selection_html_str = "<div id='feature_selection_dialog_tabs'> \
-<ul> \
-<li><a href='#featureset1tab'>Feature set 1</a></li> \
-<li><a href='#featureset2tab'>Feature set 2</a></li> \
-<li><a href='#uploadcustomtab'>Upload custom feature definitions</a></li> \
-</ul> \
-<div id='featureset1tab'> \
-</div> \
-<div id='featureset2tab'> \
-</div> \
-<div id='uploadcustomtab'> \
-</div> \
-</div> ";
+// var feature_selection_html_str = "<div id='feature_selection_dialog_tabs'> \
+// <ul> \
+// <li><a href='#featureset1tab'>Feature set 1</a></li> \
+// <li><a href='#featureset2tab'>Feature set 2</a></li> \
+// <li><a href='#uploadcustomtab'>Upload custom feature definitions</a></li> \
+// </ul> \
+// <div id='featureset1tab'> \
+// </div> \
+// <div id='featureset2tab'> \
+// </div> \
+// <div id='uploadcustomtab'> \
+// </div> \
+// </div> ";
 // $('#feature_selection_dialog').html(feature_selection_html_str);
-var featureset1_html_str = "<a href='#' onclick='select_deselect_all_feats1();'>Click here to select/deselect all</a><br><br>";
-{% for FEAT in FEATURES_AVAILABLE[0] %}
-featureset1_html_str += "<input type='checkbox' class='feat1_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>{{ FEAT }}<br>"
-{% endfor %}
-$('#featureset1tab').html(featureset1_html_str);
-var featureset2_html_str = "<a href='#' onclick='select_deselect_all_feats2();'>Click here to select/deselect all</a><br><br>";
-{% for FEAT in FEATURES_AVAILABLE[1] %}
-featureset2_html_str += "<input type='checkbox' class='feat2_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>{{ FEAT }}<br>"
-{% endfor %}
-$('#featureset2tab').html(featureset2_html_str);
+// var featureset1_html_str = "<a href='#' onclick='select_deselect_all_feats1();'>Click here to select/deselect all</a><br><br>";
+// {% for FEAT in FEATURES_AVAILABLE[0] %}
+// featureset1_html_str += "<input type='checkbox' class='feat1_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>{{ FEAT }}<br>"
+// {% endfor %}
+// $('#featureset1tab').html(featureset1_html_str);
+// var featureset2_html_str = "<a href='#' onclick='select_deselect_all_feats2();'>Click here to select/deselect all</a><br><br>";
+// {% for FEAT in FEATURES_AVAILABLE[1] %}
+// featureset2_html_str += "<input type='checkbox' class='feat2_checkbox' id='features_selected' name='features_selected' value='{{ FEAT }}' checked>{{ FEAT }}<br>"
+// {% endfor %}
+// $('#featureset2tab').html(featureset2_html_str);
 
-var customfeats_html_str = "Select .py file containing your custom feature definitions \
-(note: file will not be used until tested. Click the test button to test your script): \
-<br><br><div id='script_file_input_div'><input id='custom_feat_script_file' name='custom_feat_script_file' type='file'></div><br>\
-<input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>\
-<div><input type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();' value='Click to test'></div>\
-<div id='file_upload_message_div'></div>"
-$('#uploadcustomtab').html(customfeats_html_str);
+// var customfeats_html_str = "Select .py file containing your custom feature definitions \
+// (note: file will not be used until tested. Click the test button to test your script): \
+// <br><br><div id='script_file_input_div'><input id='custom_feat_script_file' name='custom_feat_script_file' type='file'></div><br>\
+// <input type='hidden' value='no' id='custom_script_tested' name='custom_script_tested'>\
+// <div><input type='button' id='custom_feats_file_submit_button' name='custom_feats_file_submit_button' onclick='test_custom_feature_script();' value='Click to test'></div>\
+// <div id='file_upload_message_div'></div>"
+// $('#uploadcustomtab').html(customfeats_html_str);
 
 
 

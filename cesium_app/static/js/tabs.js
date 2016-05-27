@@ -39,14 +39,15 @@ $(document).ready(function() {
         // Show/Hide Tabs
         changeTab(currentAttrValue, featsetTabs);
         // Change/remove current tab to active
-        // $(this).parent('li').addClass('active').siblings().removeClass('active');
+        $(this).parent('li').addClass('active').siblings().removeClass('active');
     });
-    $("#header_file_upload, #tarball_file_upload, #feat_file_upload").click(function(e){
+    $(".fileUpload").click(function(e){
         e.preventDefault();
         var fileTarget = $(this).attr("data-target");
         $("#"+ fileTarget).click();
     });
-    $("#headerfile, #zipfile, #custom_feat_script_file, #features_file").change(function(){
+    $("input[type='file']").change(function(){
+        console.log("asdklfajsdkfjsd harr");
         var path = $(this).val();
         var filename = path.replace(/^.*\\/, "");
         var span = $(this).attr("data-selected");
