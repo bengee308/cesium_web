@@ -690,11 +690,33 @@ function uploadFormSubmit(){
     $("#model_build_results").html("<img src='/static/media/spinner_black.gif'> Uploading files...");
 
     $("#uploadForm").ajaxSubmit({
-        /* error: function(response){
-            var x = confirm("error:");
-            var x = confirm(response);
-            return true;
-        }, */
+        error: function(response){
+            // var x = confirm("error:");
+            // var x = confirm(response);
+            // return true;
+            var text="Please upload a ";
+            if($("#headerfile").val() === ""){
+              text += "header file";
+            }
+            else if($("#zipfile").val() === ""){
+              text += "zipfile";
+            }
+            var alert = "<div class='row hidden' id='error-alert'>\
+            <div class='small-3 columns'>\
+                <div data-alert class='alert-box alert'>\
+                  <strong>Error: </strong>" + text +
+                  "<a href='#' class='close'>&times;</a>\
+                </div>\
+            </div>\
+            </div>"
+            $("#error-alert").remove();
+            $(alert).insertBefore("#createProject");
+            $( "#error-alert" ).show( "scale", { percent: 100 }, 500, function(){
+              setTimeout(function() {
+                $( "#error-alert:visible" ).removeAttr( "style" ).fadeOut();
+              }, 2000 );
+            });
+        }, 
         success: function(response){
 
             // var x = confirm(response["featureset_key"]);

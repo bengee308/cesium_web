@@ -47,7 +47,6 @@ $(document).ready(function() {
         $("#"+ fileTarget).click();
     });
     $("input[type='file']").change(function(){
-        console.log("asdklfajsdkfjsd harr");
         var path = $(this).val();
         var filename = path.replace(/^.*\\/, "");
         var span = $(this).attr("data-selected");

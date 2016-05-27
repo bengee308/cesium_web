@@ -228,3 +228,15 @@ section.top-bar-section{
     height: 80%;
     overflow: auto;
 }
+/* Alerts */
+
+.alert-box.alert {
+    border-left-color: #f22613;
+    background-color: #f77d71; 
+}
+#error-alert{
+    position: absolute;
+    top: 17%;
+    left: 75%;
+    z-index: 1;
+}
