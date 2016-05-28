@@ -232,19 +232,19 @@ function editOrDeleteProjectFormSubmit(){
             //var z = confirm("entering success branch");
 
             if($("#action").val()=="Delete"){
+                showSucc(response["result"]);
+                // var $editDeleteResultsDialog = $('<div id="editDeleteResultsDialog" class="editDeleteResultsDialog"></div>')
+                //         .html(response["result"])
+                //         .dialog({
+                //             autoOpen: true,
+                //             title: 'Request Response',
+                //             buttons: [{text:"Ok", id: "editDeleteResultsDialog-okbtn", click: function(){ $(this).dialog("close"); } }]
+                //             //position: ['center', 20]
+                //         });
 
-                var $editDeleteResultsDialog = $('<div id="editDeleteResultsDialog" class="editDeleteResultsDialog"></div>')
-                        .html(response["result"])
-                        .dialog({
-                            autoOpen: true,
-                            title: 'Request Response',
-                            buttons: [{text:"Ok", id: "editDeleteResultsDialog-okbtn", click: function(){ $(this).dialog("close"); } }]
-                            //position: ['center', 20]
-                        });
-
-                $("#editDeleteResultsDialog").bind("dialogclose", function(event){
-                    window.location.replace("http://"+location.host);
-                });
+                // $("#editDeleteResultsDialog").bind("dialogclose", function(event){
+                //     window.location.replace("http://"+location.host);
+                // });
 
             }else if($("#action").val()=="Edit"){
               $('#editDeleteResultsDialog').remove();
@@ -484,19 +484,25 @@ function newProjectFormSubmit(){
     $("#newProjectForm").ajaxSubmit({
         clearForm: false,
         success: function(response){
+          var text = response["result"];
+          if (text.indexOf('New project') == 0){
+            showSucc(text);
+          }
+          else{
+            showAlert(text);
+          }
+            // var $newProjectAddedDialog = $('<div id="newProjectAddedDialog" class="newProjectAddedDialog"></div>')
+            //         .html(response["result"])
+            //         .dialog({
+            //             autoOpen: true,
+            //             title: 'Request Response',
+            //             buttons:[{text: "Ok", id: "new-project-dialog-ok-btn", click: function(){ $("#newProjectAddedDialog").dialog("close"); } } ]
+            //             //position: ['center', 20]
+            //         });
 
-            var $newProjectAddedDialog = $('<div id="newProjectAddedDialog" class="newProjectAddedDialog"></div>')
-                    .html(response["result"])
-                    .dialog({
-                        autoOpen: true,
-                        title: 'Request Response',
-                        buttons:[{text: "Ok", id: "new-project-dialog-ok-btn", click: function(){ $("#newProjectAddedDialog").dialog("close"); } } ]
-                        //position: ['center', 20]
-                    });
-
-            $("#newProjectAddedDialog").bind("dialogclose", function(event){
-                window.location.replace("http://"+location.host);
-            });
+            // $("#newProjectAddedDialog").bind("dialogclose", function(event){
+            //     window.location.replace("http://"+location.host);
+            // });
 
         }
 
@@ -556,9 +562,9 @@ function prediction_metadata_required_validate(TrueOrFalse){
             var metadata_filename = $("#prediction_files_metadata").val();
             var tsdata_filename = $("#newpred_file").val();
             if(metadata_filename=="" || tsdata_filename==""){
-                $('#predict_form_submit_button').attr('disabled','disabled');
+                $('#predict_form_submit_button').attr('disabled','disabled').addClass('disabled');
             }else{
-                $('#predict_form_submit_button').removeAttr('disabled');
+                $('#predict_form_submit_button').removeAttr('disabled').removeClass('disabled');
             }
         });
 
@@ -566,17 +572,17 @@ function prediction_metadata_required_validate(TrueOrFalse){
         var metadata_filename = $("#prediction_files_metadata").val();
         var tsdata_filename = $("#newpred_file").val();
         if(metadata_filename=="" || tsdata_filename==""){
-            $('#predict_form_submit_button').attr('disabled','disabled');
+            $('#predict_form_submit_button').attr('disabled','disabled').addClass('disabled');
         }else{
-            $('#predict_form_submit_button').removeAttr('disabled');
+            $('#predict_form_submit_button').removeAttr('disabled').removeClass('disabled');
         }
         $("#prediction_files_metadata").change(function(){
             var metadata_filename = $("#prediction_files_metadata").val();
             var tsdata_filename = $("#newpred_file").val();
             if(metadata_filename=="" || tsdata_filename==""){
-                $('#predict_form_submit_button').attr('disabled','disabled');
+                $('#predict_form_submit_button').attr('disabled','disabled').addClass('disabled');
             }else{
-                $('#predict_form_submit_button').removeAttr('disabled');
+                $('#predict_form_submit_button').removeAttr('disabled').removeClass('disabled');
             }
         });
     }else{
@@ -612,7 +618,7 @@ function pred_model_select_change(){
 
 function enforce_unique_name(button_id,text_field_id,msg_div_id,names_list){
 
-    $("#"+button_id).attr('disabled','disabled');
+    $("#"+button_id).attr('disabled','disabled').addClass('disabled');
 
     if($.trim($('#'+text_field_id).val()) != '') {
         if(names_list.indexOf($.trim($('#'+text_field_id).val())) == -1){
@@ -622,10 +628,10 @@ function enforce_unique_name(button_id,text_field_id,msg_div_id,names_list){
                 featurize_form_validation();
             }else if(button_id=="uploadfeaturesbutton"){
                 if($("#features_file").val()!=""){
-                    $('#'+button_id).removeAttr('disabled');
+                    $('#'+button_id).removeAttr('disabled').removeClass('disabled');
                 }
             }else{
-                $('#'+button_id).removeAttr('disabled');
+                $('#'+button_id).removeAttr('disabled').removeClass('disabled');
             }
         }else{
             if(button_id.indexOf("feat") == -1){
@@ -633,10 +639,10 @@ function enforce_unique_name(button_id,text_field_id,msg_div_id,names_list){
             } else {
                 $('#'+msg_div_id).html('<font size=1 color="red">Another feature set with this name already exists.</font>');
             }
-            $('#'+button_id).attr('disabled','disabled');
+            $('#'+button_id).attr('disabled','disabled').addClass('disabled');
         }
     } else {
-        $('#'+button_id).attr('disabled','disabled');
+        $('#'+button_id).attr('disabled','disabled').addClass('disabled');
         $('#'+msg_div_id).html('');
     }
 
@@ -650,10 +656,10 @@ function enforce_unique_name(button_id,text_field_id,msg_div_id,names_list){
                     featurize_form_validation();
                 }else if(button_id=="uploadfeaturesbutton"){
                     if($("#features_file").val()!=""){
-                        $('#'+button_id).removeAttr('disabled');
+                        $('#'+button_id).removeAttr('disabled').removeClass('disabled');
                     }
                 }else{
-                    $('#'+button_id).removeAttr('disabled');
+                    $('#'+button_id).removeAttr('disabled').removeClass('disabled');
                 }
             } else {
                 if(button_id.indexOf("feat") == -1){
@@ -661,10 +667,10 @@ function enforce_unique_name(button_id,text_field_id,msg_div_id,names_list){
                 } else {
                     $('#'+msg_div_id).html('<font size=1 color="red">Another feature set with this name already exists.</font>');
                 }
-                $('#'+button_id).attr('disabled','disabled');
+                $('#'+button_id).attr('disabled','disabled').addClass('disabled');
             }
         } else {
-            $('#'+button_id).attr('disabled','disabled');
+            $('#'+button_id).attr('disabled','disabled').addClass('disabled');
             $('#'+msg_div_id).html('');
         }
     });
@@ -701,21 +707,7 @@ function uploadFormSubmit(){
             else if($("#zipfile").val() === ""){
               text += "zipfile";
             }
-            var alert = "<div class='row hidden' id='error-alert'>\
-            <div class='small-3 columns'>\
-                <div data-alert class='alert-box alert'>\
-                  <strong>Error: </strong>" + text +
-                  "<a href='#' class='close'>&times;</a>\
-                </div>\
-            </div>\
-            </div>"
-            $("#error-alert").remove();
-            $(alert).insertBefore("#createProject");
-            $( "#error-alert" ).show( "scale", { percent: 100 }, 500, function(){
-              setTimeout(function() {
-                $( "#error-alert:visible" ).removeAttr( "style" ).fadeOut();
-              }, 2000 );
-            });
+            showAlert(text);
         }, 
         success: function(response){
 
@@ -1278,9 +1270,9 @@ function upload_form_validation(){
     var dataset_name = $("#dataset_name").val();
     if(headerfile_name=="" || zipfile_name=="" || $.trim(dataset_name)==""){
 	if($.trim(upload_name)==""){
-	    $('#upload_button').attr('disabled','disabled');
+	    $('#upload_button').attr('disabled','disabled').addClass('disabled');
 	}else{
-	    $('#upload_button').removeAttr('disabled');
+	    $('#upload_button').removeAttr('disabled').removeClass('disabled');
 	}
 
 	$("#headerfile,#zipfile").change(function(){
@@ -1288,9 +1280,9 @@ function upload_form_validation(){
 	    var zipfile_name = $("#zipfile").val();
 	    var upload_name = $("#featureset_name").val();
 	    if(headerfile_name=="" || zipfile_name=="" || $.trim(upload_name)==""){
-		$('#upload_button').attr('disabled','disabled');
+		$('#upload_button').attr('disabled','disabled').addClass('disabled');
 	    }else{
-		$('#upload_button').removeAttr('disabled');
+		$('#upload_button').removeAttr('disabled').removeClass('disabled');
 	    }
 	});
     }
@@ -1304,7 +1296,7 @@ function featurize_form_validation(){
     if($.trim(featset_name)==""){
         $('#featurize_button').attr('disabled','disabled');
     }else{
-        $('#featurize_button').removeAttr('disabled');
+        $('#featurize_button').removeAttr('disabled').removeClass('disabled');
     }
 }
 
@@ -1314,7 +1306,7 @@ function featurize_form_validation(){
 function upload_features_form_validation(){
 
     if($("#features_file").val()=="" || $.trim($("#featuresetname").val())==""){
-        $("#uploadfeaturesbutton").attr('disabled','disabled');
+        $("#uploadfeaturesbutton").attr('disabled','disabled').addClass('disabled');
     }else{
         $.get("/get_list_of_featuresets_by_project/"+String($("#featureset_projname_select").val()), function(data){
             var selected_project_featureset_names = data['featset_list'];
@@ -1324,7 +1316,7 @@ function upload_features_form_validation(){
 
     $("#featureset_projname_select,#features_file").change(function(){
         if($("#features_file").val()=="" || $.trim($("#featuresetname").val())==""){
-            $("#uploadfeaturesbutton").attr('disabled','disabled');
+            $("#uploadfeaturesbutton").attr('disabled','disabled').addClass('disabled');
         }else{
             $.get("/get_list_of_featuresets_by_project/"+String($("#featureset_projname_select").val()), function(data){
                 var selected_project_featureset_names = data['featset_list'];
@@ -1344,17 +1336,17 @@ function predict_form_validation(){
 
     var filename = $("#newpred_file").val();
     if(filename=="" || $("#prediction_model_name_and_type").has('option').length == 0){
-        $('#predict_form_submit_button').attr('disabled','disabled');
+        $('#predict_form_submit_button').attr('disabled','disabled').addClass('disabled');
     }else{
-        $('#predict_form_submit_button').removeAttr('disabled');
+        $('#predict_form_submit_button').removeAttr('disabled').removeClass('disabled');
     }
 
     $("#newpred_file,#prediction_project_name").change(function(){
         var filename = $("#newpred_file").val();
         if(filename=="" || $("#prediction_model_name_and_type").has('option').length == 0){
-            $('#predict_form_submit_button').attr('disabled','disabled');
+            $('#predict_form_submit_button').attr('disabled','disabled').addClass('disabled');
         }else{
-            $('#predict_form_submit_button').removeAttr('disabled');
+            $('#predict_form_submit_button').removeAttr('disabled').removeClass('disabled');
         }
     });
 }
@@ -1376,15 +1368,15 @@ function build_model_form_validation(){
             model_list_shortened.push(model_list[i].slice(0,model_list[i].indexOf(" (created")));
         }
         if(model_list_shortened.indexOf($("#modelbuild_featset_name_select").val() + " - " + $("#model_type_select").val())==-1){
-            $('#model_build_submit_button').removeAttr('disabled');
+            $('#model_build_submit_button').removeAttr('disabled').removeClass('disabled');
             $("#model_build_okay_msg_div").html("");
         } else {
-            $('#model_build_submit_button').attr('disabled','disabled');
+            $('#model_build_submit_button').attr('disabled','disabled').addClass('disabled');
             $("#model_build_okay_msg_div").html("<font size=1 color='red'>A model with the selected specifications already exists.</font>");
         }
 
         if($("#modelbuild_featset_name_select").has('option').length == 0){
-            $('#model_build_submit_button').attr('disabled','disabled');
+            $('#model_build_submit_button').attr('disabled','disabled').addClass('disabled');
         }
 
 
@@ -1401,15 +1393,15 @@ function build_model_form_validation(){
                 model_list_shortened.push(model_list[i].slice(0,model_list[i].indexOf(" (created")));
             }
             if(model_list_shortened.indexOf($("#modelbuild_featset_name_select").val() + " - " + $("#model_type_select").val())==-1){
-                $('#model_build_submit_button').removeAttr('disabled');
+                $('#model_build_submit_button').removeAttr('disabled').removeClass('disabled');
                 $("#model_build_okay_msg_div").html("");
             } else {
-                $('#model_build_submit_button').attr('disabled','disabled');
+                $('#model_build_submit_button').attr('disabled','disabled').addClass('disabled');
                 $("#model_build_okay_msg_div").html("<font size=1 color='red'>A model with the selected specifications already exists.</font>");
             }
 
             if($("#modelbuild_featset_name_select").has('option').length == 0){
-                $('#model_build_submit_button').attr('disabled','disabled');
+                $('#model_build_submit_button').attr('disabled','disabled').addClass('disabled');
             }
 
         });
@@ -1467,9 +1459,9 @@ function populate_select_options_multiple(){
             var selected_project_featset_names = data['featset_list'];
             populate_select_options('plot_features_featset_name_select',selected_project_featset_names);
             if($("#plot_features_featset_name_select").has('option').length == 0){
-                $('#plot_features_button').attr('disabled','disabled');
+                $('#plot_features_button').attr('disabled','disabled').addClass('disabled');
             }else{
-                $('#plot_features_button').removeAttr('disabled');
+                $('#plot_features_button').removeAttr('disabled').removeClass('disabled');
             }
         }); }
 
@@ -1479,9 +1471,9 @@ function populate_select_options_multiple(){
             var selected_project_featset_names = data['featset_list'];
             populate_select_options('plot_features_featset_name_select',selected_project_featset_names);
             if($("#plot_features_featset_name_select").has('option').length == 0){
-                $('#plot_features_button').attr('disabled','disabled');
+                $('#plot_features_button').attr('disabled','disabled').addClass('disabled');
             }else{
-                $('#plot_features_button').removeAttr('disabled');
+                $('#plot_features_button').removeAttr('disabled').removeClass('disabled');
             }
         });
     });
@@ -2107,4 +2099,39 @@ function generate_pred_results_table(div_id, results_dict){
 
     $(div_id).html(html_str);
 
+}
+function showAlert(text){
+  var alert = "<div class='row hidden' id='error-alert'>\
+  <div class='small-3 columns'>\
+      <div data-alert class='alert-box alert'>\
+        <strong>Error - </strong>" + text +
+        "<a href='#' class='close'>&times;</a>\
+      </div>\
+  </div>\
+  </div>"
+  $("#error-alert").remove();
+  $(alert).insertBefore("#createProject");
+  $( "#error-alert" ).show( "scale", { percent: 100 }, 500, function(){
+    setTimeout(function() {
+      $( "#error-alert:visible" ).removeAttr( "style" ).fadeOut();
+    }, 2500 );
+  });
+}
+function showSucc(text){
+  var alert = "<div class='row hidden' id='error-alert'>\
+  <div class='small-3 columns'>\
+      <div data-alert class='alert-box success'>\
+        <strong>Success - </strong>" + text +
+        "<a href='#' class='close'>&times;</a>\
+      </div>\
+  </div>\
+  </div>"
+  $("#error-alert").remove();
+  $(alert).appendTo("body");
+  $( "#error-alert" ).show( "scale", { percent: 100 }, 500, function(){
+    setTimeout(function() {
+      $( "#error-alert:visible" ).removeAttr( "style" ).fadeOut();
+    }, 2500 );
+    window.location.replace("http://"+location.host);
+  });
 }

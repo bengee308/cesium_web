@@ -110,6 +110,10 @@ $(document).ready(function() {
         else if (divText === "New model successfully created"){
             appendContinueButton("#predictTab");
         }
+        else if (divText === "Feature Set Title must contain non-whitespace characters. Please try a different title."){
+            appendBackButton("#featurizeTab");
+        }
+
 
         //handle errors here too
     });
@@ -226,7 +230,10 @@ $(document).ready(function() {
         });  
     }
     function appendContinueButton(next){
-        $("#model_build_results").append("<div><a href='#'' class='button success continueButton' data-next='" + next + "'>Continue&nbsp;&nbsp;&nbsp;<i class='fa fa-arrow-circle-o-right'></i></a></div>");
+        $("#model_build_results").append("<div><a href='#' class='button success continueButton' data-next='" + next + "'>Continue&nbsp;&nbsp;&nbsp;<i class='fa fa-arrow-circle-o-right'></i></a></div>");
+    }
+    function appendBackButton(prev){
+        $("#model_build_results").append("<div><a href='#' class='button info continueButton' data-next='" + prev + "'><i class='fa fa-arrow-circle-o-left'></i>&nbsp;&nbsp;&nbsp;Back</a></div>");
     }
     controlTabs();
     // $.get("/get_list_of_projects", function(data){

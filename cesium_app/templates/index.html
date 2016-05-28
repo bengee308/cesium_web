@@ -103,15 +103,19 @@
                     <div class="panel">
                     <h4>Manage an existing project:</h4>
                     <h6>Select a project below or create a new project to begin</h6>
-                            <table id="manageProjTable">
-                                {% for PROJ_NAME in CURRENT_PROJECTS %}
-                                    <tr class="proj">
-                                        <td><a href="#" class="selectProj" data-proj="{{ PROJ_NAME }}">{{ PROJ_NAME }}</a></td>
-                                        <td><a href="#" class="editProj" data-proj="{{ PROJ_NAME }}">Edit</a></td>
-                                        <td><a href="#" class="deleteProj" data-proj="{{ PROJ_NAME }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
+                        <div class="row">
+                            <div class="large-10 large-offset-1 columns">
+                                <table id="manageProjTable">
+                                    {% for PROJ_NAME in CURRENT_PROJECTS %}
+                                        <tr class="proj">
+                                            <td><a href="#" class="selectProj" data-proj="{{ PROJ_NAME }}">{{ PROJ_NAME }}</a></td>
+                                            <td style="width: 50px"><a href="#" class="editProj" data-proj="{{ PROJ_NAME }}">Edit</a></td>
+                                            <td style="width: 30px"><a href="#" class="deleteProj" data-proj="{{ PROJ_NAME }}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                     <form id='editOrDeleteProjectForm' action='/editOrDeleteProject' enctype='multipart/form-data' method='post' class="hiddenForm">

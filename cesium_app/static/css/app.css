@@ -201,6 +201,14 @@ section.top-bar-section{
     position: relative;
     top: 60px;
 }
+#manageProjTable{
+    width: 100%;
+    table-layout: fixed;
+}
+#manageProjTable td{
+    word-wrap:break-word;
+    color: red;
+}
 #projTitle{
     color: white;
 }
@@ -222,7 +230,7 @@ section.top-bar-section{
     top: 100px;
 }
 #editDeleteResultsDialog{
-    height: 50%;    
+    height: 70%;    
 }
 #editProjectForm{
     height: 80%;
