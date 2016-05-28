@@ -17,6 +17,10 @@ $(document).ready(function() {
         setCurrProj(currProj);
     }
     else if(path === "/"){
+        if($('#manageProjTable tr').length == 0){
+            var toAppend = "<div class='text-center'>No projects yet. <br><br> <button data-reveal-id='createProject'><i class='fa fa-plus-square-o'></i>&nbsp;&nbsp; Create new Project</button>"
+            $(toAppend).insertAfter("#manageProjTable");
+        }
         setState("manage");
         // $("#projTitle").html("");
         setCurrProj("")

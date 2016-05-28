@@ -668,42 +668,68 @@
 {% endblock %}
 <BR><BR>
 {% block footer %}
-<footer class="footer" style="background-color:#c2c2c2;">
-<div style='text-align:center;'>
-<div style='display:inline-block;text-align:left;'>
-<table>
-<tr style='width:100%;'>
-<td style='width:10%;'>
-</td>
-<td style='width:25%;'>
-<h4 style='padding-left:40px;'>About</h4>
-<ul>
-<li><a href="#" id='about'>Info</a></li>
-<li><a href="http://astro.berkeley.edu/">UC Berkeley Astronomy</a></li>
-<li><a href="http://www.stat.berkeley.edu/">UC Berkeley Statistics</a></li>
-<li><a href='#' id='contact'>Contact</a></li>
-</ul>
-</td>
-<td style='width:25%;'>
-<h4 style='padding-left:40px;'>Related</h4>
-<ul>
-<li><a href="http://dotastro.org/">DotAstro</a></li>
-<li><a href="http://cftd.info/">Center For Time-Domain Informatics</a></li>
-<li><a href="http://www.bigmacc.info/">Machine-learned ASAS Classification Catalog</a></li>
-</ul>
-</td>
-<td style='width:25%;'>
-<h4 style='padding-left:40px;'>Links</h4>
-<ul>
-<li><a href='http://timemachine.iic.harvard.edu/'>Harvard TSC</a></li>
-<li><a href="http://simbad.u-strasbg.fr/simbad/">SIMBAD</a></li>
-<li><a href="http://www.sai.msu.su/gcvs/gcvs/index.htm">GCVS</a></li>
-</ul>
-</td>
-</tr>
-</table>
-</div>
-</div>
+<footer class="footer">
+  <div class="row full-width">
+    <div class="small-4 columns">
+        <h4>About</h4>
+        <ul class="footer-links">
+            <li><a href="#" id='about' target="_blank">Info</a></li>
+            <li><a href="http://astro.berkeley.edu/" target="_blank">UC Berkeley Astronomy</a></li>
+            <li><a href="http://www.stat.berkeley.edu/" target="_blank">UC Berkeley Statistics</a></li>
+            <li><a href='#' id='contact' target="_blank">Contact</a></li>
+        </ul>
+    </div>
+    <div class="small-4 columns">
+        <h4>Related</h4>
+        <ul class="footer-links">
+            <li><a href="http://dotastro.org/" target="_blank">DotAstro</a></li>
+            <li><a href="http://cftd.info/" target="_blank">Center For Time-Domain Informatics</a></li>
+            <li><a href="http://www.bigmacc.info/" target="_blank">Machine-learned ASAS Classification Catalog</a></li>
+        </ul>
+    </div>
+    <div class="small-4 columns">
+        <h4>Links</h4>
+        <ul class="footer-links">
+            <li><a href='http://timemachine.iic.harvard.edu/' target="_blank">Harvard TSC</a></li>
+            <li><a href="http://simbad.u-strasbg.fr/simbad/" target="_blank">SIMBAD</a></li>
+            <li><a href="http://www.sai.msu.su/gcvs/gcvs/index.htm" target="_blank">GCVS</a></li>
+        </ul>
+    </div>        
+  </div>
+<!-- <div style='text-align:center;'>
+   <div style='display:inline-block;text-align:left;'>
+      <table>
+         <tr style='width:100%;'>
+            <td style='width:10%;'></td>
+            <td style='width:25%;'>
+               <h4 style='padding-left:40px;'>About</h4>
+               <ul>
+                  <li><a href="#" id='about'>Info</a></li>
+                  <li><a href="http://astro.berkeley.edu/">UC Berkeley Astronomy</a></li>
+                  <li><a href="http://www.stat.berkeley.edu/">UC Berkeley Statistics</a></li>
+                  <li><a href='#' id='contact'>Contact</a></li>
+               </ul>
+            </td>
+            <td style='width:25%;'>
+               <h4 style='padding-left:40px;'>Related</h4>
+               <ul>
+                  <li><a href="http://dotastro.org/">DotAstro</a></li>
+                  <li><a href="http://cftd.info/">Center For Time-Domain Informatics</a></li>
+                  <li><a href="http://www.bigmacc.info/">Machine-learned ASAS Classification Catalog</a></li>
+               </ul>
+            </td>
+            <td style='width:25%;'>
+               <h4 style='padding-left:40px;'>Links</h4>
+               <ul>
+                  <li><a href='http://timemachine.iic.harvard.edu/'>Harvard TSC</a></li>
+                  <li><a href="http://simbad.u-strasbg.fr/simbad/">SIMBAD</a></li>
+                  <li><a href="http://www.sai.msu.su/gcvs/gcvs/index.htm">GCVS</a></li>
+               </ul>
+            </td>
+         </tr>
+      </table>
+   </div>
+</div> -->
 </footer>
 {% endblock %}
 {% endblock %}
